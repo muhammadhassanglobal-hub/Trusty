@@ -47,7 +47,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body {
+        html, body {
             background-color: var(--light-bg);
             color: var(--text-main);
             line-height: 1.6;
@@ -90,7 +90,7 @@
         .ser-image-container {
             width: 55px; height: 55px; border-radius: 50%; border: 3px solid var(--tw-light-blue);
             display: flex; align-items: center; justify-content: center; background-color: var(--white);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; flex-shrink: 0;
         }
         .ser-image-container img { width: 70%; height: auto; object-fit: contain; }
         .ser-logo-text { display: flex; flex-direction: column; line-height: 1; }
@@ -298,6 +298,7 @@
             font-size: 0.875rem;
             transition: all 0.3s ease;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            text-align: center;
         }
 
         .he-btn:hover {
@@ -680,6 +681,10 @@
             box-shadow: 0 30px 60px -12px rgba(0, 59, 92, 0.4);
         }
 
+        .cam-banner-content {
+            padding: 3rem;
+        }
+
         /* Plumbing Specialties 10-Icon Grid (chi- prefix) - Flip Card Styling */
         .chi-section {
             padding: 80px 20px;
@@ -835,6 +840,10 @@
             align-items: center;
         }
 
+        .new-flex-child {
+            width: 100%;
+        }
+
         @media (min-width: 1024px) {
             .new-flex-container {
                 flex-direction: row;
@@ -931,6 +940,15 @@
             .new-news-badge { display: block; }
         }
 
+        .new-heading {
+            font-size: 44px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-style: italic;
+            color: #003B5C;
+        }
+
         .new-news-list {
             display: flex;
             flex-direction: column;
@@ -968,6 +986,12 @@
             margin: 0 auto;
         }
 
+        .int-heading {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 40px;
+        }
+
         .int-event-box {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
@@ -990,6 +1014,11 @@
             font-style: italic;
             margin-bottom: 30px;
             color: #e0f2fe;
+        }
+
+        .int-subtext {
+            opacity: 0.9;
+            font-size: 18px;
         }
 
         .int-btn-white {
@@ -1110,6 +1139,7 @@
         .con-info-text p {
             font-size: 14px;
             color: #64748b;
+            word-break: break-word;
         }
 
         .con-map-wrapper {
@@ -1124,53 +1154,6 @@
         .con-map-wrapper:hover {
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             border-color: #0284c7;
-        }
-
-        /* Mobile Responsive Adjustments (from style1.css) */
-        @media (max-width: 768px) {
-            .he-section {
-                flex-direction: column;
-            }
-            .he-image-container {
-                width: 100%;
-                height: 280px;
-                clip-path: none;
-                -webkit-clip-path: none;
-            }
-            .he-divider {
-                display: none;
-            }
-            .he-content {
-                width: 100%;
-                padding: 2.5rem 1.5rem;
-            }
-            .he-title {
-                font-size: 1.25rem;
-            }
-            .he-author-section {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .st-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .b3-grid-achievements {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .st-grid {
-                grid-template-columns: 1fr;
-            }
-            .st-card {
-                border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.2);
-                padding-bottom: 1.5rem;
-            }
-            .st-card:last-child {
-                border-bottom: none;
-            }
         }
 
         /* =========================================
@@ -1281,6 +1264,7 @@
             color: var(--color-cyan);
             margin-right: 0.5rem;
             transition: transform 0.2s ease;
+            flex-shrink: 0;
         }
 
         .fe-footer-list a:hover .fe-link-icon {
@@ -1307,6 +1291,7 @@
             text-decoration: none;
             font-size: 0.875rem;
             transition: color 0.2s ease;
+            word-break: break-word;
         }
 
         .fe-contact-text.fe-large {
@@ -1328,17 +1313,21 @@
             font-size: 0.875rem;
             gap: 1rem;
             color: var(--color-text-gray);
+            text-align: center;
         }
 
         @media (min-width: 768px) {
             .fe-footer-bottom {
                 flex-direction: row;
+                text-align: left;
             }
         }
 
         .fe-bottom-links {
             display: flex;
             gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .fe-bottom-links a {
@@ -1380,6 +1369,270 @@
 
         .curve-dividerfoofon .shape-fillfoofon {
             fill: var(--white);
+        }
+
+        /* =========================================
+           Comprehensive Mobile Responsive Adjustments
+           ========================================= */
+        @media (max-width: 992px) {
+            .he-content {
+                padding: 3rem 2rem;
+            }
+            .he-dots {
+                left: 2rem;
+            }
+            .cam-banner-content {
+                padding: 2.25rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ser-navbar {
+                height: 80px;
+            }
+            .ser-nav-menu {
+                top: 80px;
+                max-height: calc(100vh - 80px);
+            }
+            .ser-brand-name {
+                font-size: 1.5rem;
+            }
+            .ser-image-container {
+                width: 46px;
+                height: 46px;
+            }
+
+            /* Hero Section */
+            .he-section {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .he-image-container {
+                width: 100%;
+                height: 300px;
+                clip-path: none;
+                -webkit-clip-path: none;
+            }
+            .he-divider {
+                display: none;
+            }
+            .he-content {
+                width: 100%;
+                padding: 2.5rem 1.5rem;
+            }
+            .he-dots {
+                top: 1.25rem;
+                left: 1.5rem;
+            }
+            .he-quote-mark.start {
+                position: static;
+                display: block;
+                line-height: 1;
+                margin-bottom: -0.5rem;
+            }
+            .he-title {
+                font-size: 1.25rem;
+                padding-left: 0;
+                margin-bottom: 1.5rem;
+            }
+            .he-author-section {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 0;
+                margin-top: 2rem;
+                gap: 1.25rem;
+            }
+            .he-btn {
+                width: 100%;
+            }
+
+            /* Stats Grid */
+            .st-section {
+                padding: 2.5rem 1rem;
+            }
+            .st-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.25rem;
+            }
+            .st-card:nth-child(2) {
+                border-right: none;
+            }
+            .st-number {
+                font-size: 2.25rem;
+            }
+
+            /* Service Highlights */
+            .b3-container {
+                padding: 2.5rem 1rem;
+            }
+            .b3-section-title {
+                font-size: 1.4rem;
+                margin-bottom: 1.75rem;
+            }
+            .b3-grid-achievements {
+                grid-template-columns: 1fr;
+            }
+            .b3-achievement-card {
+                height: 7rem;
+            }
+
+            /* Awards Cards */
+            .ach-container {
+                padding: 0 1rem;
+                margin-bottom: 3rem;
+            }
+            .ach-card {
+                padding: 1.75rem 1.25rem;
+            }
+            .ach-card-title {
+                min-height: auto;
+                font-size: 1.15rem;
+            }
+            .ach-icon-circle {
+                width: 6.5rem;
+                height: 6.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            /* Philosophy & Education & Commercial Sections */
+            .ph-py-20, .edu-py-20 {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+            .ph-text-4xl, .edu-text-4xl, .cam-text-4xl {
+                font-size: 1.75rem;
+            }
+            .ph-min-h-450 {
+                min-height: 280px;
+            }
+            .ph-btn-white, .cam-btn-white {
+                width: 100%;
+                padding: 0.9rem 1.5rem;
+                text-align: center;
+            }
+            .edu-mb-16 {
+                margin-bottom: 2.25rem;
+            }
+            .cam-mb-24 {
+                margin-bottom: 3.5rem;
+            }
+            .cam-min-h-500 {
+                min-height: 260px;
+            }
+            .cam-banner-content {
+                padding: 1.75rem 1.25rem;
+            }
+
+            /* Specialties Grid */
+            .chi-section {
+                padding: 50px 15px;
+            }
+            .chi-section-title {
+                margin-bottom: 30px;
+            }
+            .chi-section-title h2 {
+                font-size: 26px;
+            }
+            .chi-grid-5 {
+                gap: 15px;
+            }
+
+            /* News Section */
+            .new-news-section {
+                padding: 50px 15px;
+            }
+            .new-flex-container {
+                gap: 35px;
+            }
+            .new-flip-box {
+                height: 280px;
+            }
+            .new-heading {
+                font-size: 28px;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            .new-news-item {
+                padding: 18px;
+                border-radius: 18px;
+            }
+
+            /* 24/7 Emergency Section */
+            .int-events-section {
+                padding: 50px 15px;
+            }
+            .int-heading {
+                font-size: 28px;
+                margin-bottom: 25px;
+            }
+            .int-event-box {
+                padding: 25px 18px;
+                border-radius: 24px;
+            }
+            .int-quote {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+            .int-subtext {
+                font-size: 15px;
+            }
+            .int-btn-white {
+                width: 100%;
+                padding: 14px 20px;
+                margin-top: 25px;
+                font-size: 0.95rem;
+            }
+
+            /* Contact Section */
+            .con-section {
+                padding: 50px 15px 60px;
+            }
+            .con-title {
+                font-size: 24px;
+                margin-bottom: 25px;
+            }
+            .con-card {
+                padding: 24px 18px;
+            }
+            .con-map-wrapper {
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ser-nav-container {
+                padding: 0 15px;
+            }
+            .ser-brand-name {
+                font-size: 1.35rem;
+            }
+            .st-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .st-card {
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
+                padding-bottom: 1.25rem;
+                border-radius: 0;
+            }
+            .st-card:last-child {
+                border-bottom: none;
+            }
+            .edu-btn-light-blue {
+                flex: 1 1 calc(50% - 0.75rem);
+                text-align: center;
+                padding: 0.75rem 0.5rem;
+            }
+            .chi-grid-5 {
+                grid-template-columns: 1fr;
+            }
+            .chi-flip-card {
+                height: 190px;
+            }
+            .new-flip-box {
+                height: 230px;
+            }
         }
     </style>
 </head>
@@ -1679,7 +1932,7 @@
                 <div class="cam-lg-w-1-2" style="overflow: hidden;">
                     <img src="https://i.pinimg.com/736x/25/fa/e6/25fae6ae9382c228f88382ada56a83a0.jpg" alt="Commercial Plumbing Systems" class="cam-img-fill cam-min-h-500">
                 </div>
-                <div class="cam-lg-w-1-2 cam-flex cam-flex-col cam-justify-center" style="padding: 3rem;">
+                <div class="cam-lg-w-1-2 cam-flex cam-flex-col cam-justify-center cam-banner-content">
                     <h2 class="cam-text-4xl cam-font-bold cam-mb-6 cam-text-white">Commercial Plumbing Division</h2>
                     <p class="cam-text-blue-100 cam-text-lg cam-mb-6">
                         At TrustyPlumb, we understand that plumbing downtime means lost revenue for your business. Our dedicated Commercial Division delivers heavy-duty plumbing maintenance, backflow testing, and system installations for restaurants, offices, retail centers, and industrial facilities.
@@ -1873,7 +2126,7 @@
                     </div>
                 </div>
                 <div class="new-flex-child">
-                    <h2 style="font-size: 44px; font-weight: 900; margin-bottom: 30px; text-transform: uppercase; font-style: italic; color: #003B5C;">Plumbing Tips & News</h2>
+                    <h2 class="new-heading">Plumbing Tips & News</h2>
                     <div class="new-news-list">
                         <div class="new-news-item">
                             <div>
@@ -1902,10 +2155,10 @@
     <!-- 10. 24/7 EMERGENCY GUARANTEE BANNER (int-events-section) -->
     <section class="int-events-section">
         <div class="int-container">
-            <h2 style="font-size: 42px; font-weight: 900; margin-bottom: 40px;">24/7 EMERGENCY DISPATCH</h2>
+            <h2 class="int-heading">24/7 EMERGENCY DISPATCH</h2>
             <div class="int-event-box">
                 <p class="int-quote">"Burst pipe at midnight or overflowing drain on a Sunday? We fix it right, day or night—with zero overtime surprises."</p>
-                <p style="opacity: 0.9; font-size: 18px;">Our GPS-dispatched service trucks are fully stocked with thousands of parts so our licensed plumbers can solve your emergency on the very first visit.</p>
+                <p class="int-subtext">Our GPS-dispatched service trucks are fully stocked with thousands of parts so our licensed plumbers can solve your emergency on the very first visit.</p>
                 <a href="tel:+18773460820" class="int-btn-white">Call Emergency Hotline Now</a>
             </div>
         </div>
