@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustyPlumb - Terms of Service </title>
+    <link rel="icon" type="image/png" href="image/logo.png">
+
+    <style>
+        /* =========================================
+           BASE STYLES (Matched with index.html)
+           ========================================= */
+        :root {
+            --primary: #1E3A8A; 
+            --secondary: #F97316; 
+            --dark: #1F2937;
+            --light: #F3F4F6;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+            --tw-dark-blue: #003B5C;
+            --tw-light-blue: #00AEEF;
+            --bg-gray: #e2e8f0; 
+            --text-gray: #64748b;
+            --primary-hover: #0284c7;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-500: #64748b;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --shadow-primary: 0 10px 15px -3px rgba(14, 165, 233, 0.3);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            
+            /* Footer Variables */
+            --color-deepblue: #0B1320;
+            --color-cyan: #22d3ee;
+            --color-cyan-hover: #67e8f9;
+            --color-text-light: #ffffff;
+            --color-text-gray: #9ca3af;
+            --color-border: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: var(--gray-600);
+            background-color: var(--gray-50);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        button { cursor: pointer; border: none; outline: none; font-family: inherit; }
+
+        .icon-svg {
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+     /* =========================================
+           Navbar Styling 
+           ========================================= */
+        .ser-navbar {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 95px;
+            display: flex;
+            align-items: center;
+            border-bottom: 4px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .ser-nav-container {
+            max-width: 1250px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ser-logo-section { display: flex; align-items: center; gap: 15px; text-decoration: none; transition: var(--transition); }
+        .ser-logo-section:hover { transform: scale(1.02); }
+
+        .ser-image-container {
+            width: 55px; height: 55px; border-radius: 50%; border: 3px solid var(--tw-light-blue);
+            display: flex; align-items: center; justify-content: center; background-color: var(--white);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;
+        }
+        .ser-image-container img { width: 70%; height: auto; object-fit: contain; }
+        .ser-logo-text { display: flex; flex-direction: column; line-height: 1; }
+        .ser-brand-name { font-size: 1.8rem; font-weight: 800; color: var(--tw-dark-blue); letter-spacing: -0.5px; }
+        .ser-brand-name span { color: var(--tw-light-blue); }
+        .ser-sub-text { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-gray); font-weight: 700; margin-top: 2px; }
+
+        .ser-nav-menu { display: flex; align-items: center; gap: 15px; list-style: none; }
+        .ser-nav-link, .ser-dropdown-trigger {
+            text-decoration: none; font-size: 0.85rem; font-weight: 700; color: var(--tw-dark-blue);
+            padding: 10px 15px; border-radius: 8px; transition: var(--transition); display: flex; align-items: center;
+            gap: 6px; text-transform: uppercase; cursor: pointer; border: none; background: transparent;
+        }
+        .ser-nav-link:hover, .ser-dropdown-trigger:hover { color: var(--tw-light-blue); background: rgba(0, 174, 239, 0.08); }
+
+        .ser-dropdown-container { position: relative; }
+        .ser-n-arrow { font-size: 0.7rem; transition: transform 0.3s ease; color: var(--tw-light-blue); }
+        .ser-dropdown-container:hover .ser-n-arrow { transform: rotate(180deg); }
+
+        .ser-dropdown {
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--white);
+            min-width: 240px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+            list-style: none; padding: 8px; opacity: 0; visibility: hidden; transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05); z-index: 1100; margin-top: 10px;
+        }
+        .ser-dropdown::before {
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
+            width: 12px; height: 12px; background: var(--white); border-left: 1px solid rgba(0,0,0,0.05); border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        .ser-dropdown-container:hover .ser-dropdown { opacity: 1; visibility: visible; }
+        .ser-dropdown li a { display: block; padding: 12px 16px; color: var(--tw-dark-blue); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-radius: 6px; transition: var(--transition); }
+        .ser-dropdown li a:hover { background: var(--tw-light-blue); color: var(--white); }
+
+        .ser-call-btn {
+            margin-left: 10px; padding: 12px 28px; background-color: var(--white); border: 2px solid var(--tw-dark-blue);
+            border-radius: 10px; text-decoration: none; font-weight: 800; font-size: 0.85rem; color: var(--tw-dark-blue);
+            transition: all 0.2s ease; box-shadow: 0 4px 0 var(--tw-dark-blue); text-transform: uppercase; display: inline-block; text-align: center;
+        }
+        .ser-call-btn:hover { box-shadow: 0 6px 0 var(--tw-dark-blue); color: var(--tw-light-blue); border-color: var(--tw-light-blue); }
+        .ser-call-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--tw-dark-blue); }
+
+        .ser-menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; background: none; border: none; padding: 10px; }
+        .ser-menu-toggle span { width: 30px; height: 3px; background-color: var(--tw-dark-blue); border-radius: 3px; transition: var(--transition); }
+
+        @media (max-width: 992px) {
+            .ser-menu-toggle { display: flex; }
+            .ser-nav-menu {
+                position: absolute; top: 95px; left: 0; width: 100%; background-color: var(--white); flex-direction: column;
+                padding: 10px 0; display: none; border-top: 1px solid #eee; gap: 0; max-height: calc(100vh - 95px); overflow-y: auto; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            }
+            .ser-nav-menu.ser-active { display: flex; }
+            .ser-nav-menu li { width: 100%; border-bottom: 1px solid #f1f5f9; }
+            .ser-nav-link, .ser-dropdown-trigger { width: 100%; padding: 18px 24px; border-radius: 0; justify-content: space-between; font-size: 0.95rem; }
+            .ser-dropdown { position: static; transform: none; width: 100%; opacity: 1; visibility: visible; display: none; box-shadow: none; background: #f8fafc; padding: 0 0 0 20px; border: none; margin-top: 0; }
+            .ser-dropdown::before { display: none; }
+            .ser-dropdown-container.ser-mobile-open .ser-dropdown { display: block; }
+            .ser-dropdown-container.ser-mobile-open .ser-n-arrow { transform: rotate(180deg); }
+            .ser-call-btn { margin: 20px 24px; display: block; box-shadow: 0 4px 0 var(--tw-dark-blue); }
+        }
+
+     
+
+        /* ===== TERMS OF SERVICE SPECIFIC STYLES ===== */
+        .tos-header {
+            background: linear-gradient(135deg, var(--tw-dark-blue) 0%, var(--primary) 100%);
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tos-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 174, 239, 0.15);
+            border-radius: 50%;
+            filter: blur(50px);
+        }
+
+        .tos-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(249, 115, 22, 0.15);
+            border-radius: 50%;
+            filter: blur(50px);
+        }
+
+        .tos-breadcrumb {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #e2e8f0;
+        }
+
+        .tos-breadcrumb a {
+            color: var(--tw-light-blue);
+            transition: var(--transition);
+        }
+        .tos-breadcrumb a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        .tos-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+        @media (min-width: 768px) {
+            .tos-title { font-size: 3.25rem; }
+        }
+
+        .tos-updated {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        /* Content Layout */
+        .tos-section {
+            padding: 4rem 0 5rem 0;
+        }
+
+        .tos-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        @media (min-width: 992px) {
+            .tos-layout {
+                grid-template-columns: 280px 1fr;
+                gap: 3rem;
+            }
+        }
+
+        /* Quick Navigation Sidebar */
+        .tos-sidebar {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--gray-200);
+            position: sticky;
+            top: 115px;
+            transition: var(--transition);
+        }
+        .tos-sidebar:hover {
+            box-shadow: 0 8px 25px rgba(0, 174, 239, 0.15);
+            border-color: var(--tw-light-blue);
+            transform: translateY(-2px);
+        }
+
+        .tos-sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--tw-dark-blue);
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--gray-100);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tos-nav-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tos-nav-list a {
+            display: block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            transition: var(--transition);
+        }
+
+        .tos-nav-list a:hover {
+            background-color: #f0f9ff;
+            color: var(--tw-light-blue);
+            transform: translateX(6px);
+        }
+
+        /* Main Document Card */
+        .tos-content-card {
+            background: var(--white);
+            border-radius: 1.25rem;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+        .tos-content-card:hover {
+            box-shadow: 0 20px 40px -10px rgba(0, 174, 239, 0.12);
+            border-color: rgba(0, 174, 239, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .tos-content-card {
+                padding: 3.5rem;
+            }
+        }
+
+        .tos-intro {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--secondary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin-bottom: 2.5rem;
+            color: var(--gray-700);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .tos-intro:hover {
+            background-color: #f0f9ff;
+            transform: translateX(4px);
+        }
+
+        .tos-block {
+            margin-bottom: 2.5rem;
+            scroll-margin-top: 120px;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        .tos-block:hover {
+            background-color: #f8fafc;
+            border-color: rgba(0, 174, 239, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 59, 92, 0.04);
+        }
+
+        .tos-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .tos-block h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--tw-dark-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tos-num {
+            background: linear-gradient(135deg, var(--tw-light-blue), var(--primary));
+            color: var(--white);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        .tos-block:hover .tos-num {
+            transform: rotate(360deg) scale(1.1);
+            background: var(--tw-dark-blue);
+        }
+
+        .tos-block p {
+            margin-bottom: 1rem;
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .tos-list {
+            margin: 1rem 0 1.25rem 0;
+            padding-left: 0.5rem;
+        }
+
+        .tos-list li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--gray-700);
+            transition: var(--transition);
+        }
+        .tos-list li:hover {
+            transform: translateX(4px);
+            color: var(--tw-dark-blue);
+        }
+
+        .tos-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            width: 20px;
+            height: 20px;
+            background-color: #ffedd5;
+            color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        /* Contact Box inside Terms */
+        .tos-contact-box {
+            background: linear-gradient(to right, #f0f9ff, #e0f2fe);
+            border: 1px solid #bae6fd;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: flex-start;
+            transition: var(--transition);
+        }
+        .tos-contact-box:hover {
+            box-shadow: 0 8px 25px rgba(0, 174, 239, 0.2);
+            transform: translateY(-3px);
+        }
+
+        @media (min-width: 768px) {
+            .tos-contact-box {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .tos-contact-info h4 {
+            font-size: 1.25rem;
+            color: var(--tw-dark-blue);
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .tos-contact-info p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: var(--slate-600);
+        }
+
+        .tos-btn {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 0.85rem 1.75rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(249, 115, 22, 0.25);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .tos-btn:hover {
+            background-color: #ea580c;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 15px rgba(249, 115, 22, 0.4);
+        }
+
+        /* ===== FOOTER (Exact from he fe.html) ===== */
+        .footer-containerfoofon { background: linear-gradient(145deg, #020617, #0f172a); color: var(--white); position: relative; padding-top: clamp(80px, 12vw, 120px); padding-bottom: 30px; display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .curve-dividerfoofon { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; transform: translateY(-1px); }
+        .curve-dividerfoofon svg { display: block; width: 100%; height: clamp(40px, 6vw, 80px); }
+        .curve-dividerfoofon .shape-fillfoofon { fill: var(--gray-50); }
+
+        .fe-container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+        .fe-footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        @media (min-width: 768px) { .fe-footer-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .fe-footer-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; } }
+
+        .fe-brand-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem; text-decoration: none; }
+        .fe-brand-title { font-size: 1.875rem; font-weight: 700; color: var(--color-text-light); letter-spacing: -0.025em; }
+        .fe-text-cyan { color: var(--color-cyan); }
+        .fe-brand-desc { font-size: 0.875rem; line-height: 1.625; padding-right: 1rem; color: var(--color-text-gray); }
+        .fe-footer-heading { font-size: 1.125rem; font-weight: 600; color: var(--color-text-light); margin-bottom: 1.5rem; }
+
+        .fe-footer-list { list-style: none; }
+        .fe-footer-list li { margin-bottom: 0.75rem; }
+        .fe-footer-list a { display: flex; align-items: center; color: var(--color-text-gray); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease; }
+        .fe-footer-list a:hover { color: var(--color-cyan); }
+        .fe-link-icon { width: 1rem; height: 1rem; color: var(--color-cyan); margin-right: 0.5rem; transition: transform 0.2s ease; }
+        .fe-footer-list a:hover .fe-link-icon { transform: translateX(4px); }
+
+        .fe-contact-item { display: flex; align-items: flex-start; margin-bottom: 1rem; }
+        .fe-contact-icon { width: 1.25rem; height: 1.25rem; color: var(--color-cyan); margin-right: 0.75rem; flex-shrink: 0; margin-top: 0.125rem; }
+        .fe-contact-text { color: var(--color-text-light); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease; }
+        .fe-contact-text.fe-large { font-size: 1.125rem; font-weight: 500; }
+        .fe-contact-text:hover { color: var(--color-cyan); }
+
+        .fe-footer-bottom { display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding-top: 2rem; border-top: 1px solid var(--color-border); font-size: 0.875rem; gap: 1rem; color: var(--color-text-gray); }
+        @media (min-width: 768px) { .fe-footer-bottom { flex-direction: row; } }
+        .fe-bottom-links { display: flex; gap: 1.5rem; }
+        .fe-bottom-links a { color: var(--color-text-gray); text-decoration: none; transition: color 0.2s ease; }
+        .fe-bottom-links a:hover { color: var(--color-cyan); }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="ser-navbar">
+        <div class="ser-nav-container">
+            
+            <a href="index.html" class="ser-logo-section">
+   <div class="ser-image-container">
+                   <img src="image/logo.png" alt="Logo" style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%;">
+                </div>
+             
+                <div class="ser-logo-text">
+                    <span class="ser-brand-name">Trusty<span>Plumb</span></span>
+                  
+                </div>
+            </a>
+
+            <ul class="ser-nav-menu" id="navMenu">
+                <li><a href="#" class="ser-nav-link">Home</a></li>
+                
+                <li class="ser-dropdown-container" id="servicesDropdown">
+                    <button class="ser-dropdown-trigger">
+                        Services <span class="ser-n-arrow">▼</span>
+                    </button>
+                    <ul class="ser-dropdown">
+                        <li><a href="Leak Repair.html">Leak Repair</a></li>
+                       
+                        <li><a href="Drain Cleaning.html">Drain Cleaning</a></li>
+                        <li><a href="Water Heaters.html">Water Heaters</a></li>
+                        
+                        <li><a href="Pipe Installation.html">Pipe Installation</a></li>
+                        <li><a href="Commercial Plumbing.html">Commercial Plumbing</a></li>
+                           <li><a href="Emergency Plumbing.html">24/7 Emergency</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="Reviews.html" class="ser-nav-link">Trusted Reviews</a></li>
+                <li><a href="Team.html" class="ser-nav-link">Meet Our Team</a></li>
+                <li><a href="tel:+1 877 346 0820" class="ser-call-btn">Call Now</a></li>
+            </ul>
+
+            <button class="ser-menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <header class="tos-header">
+        <div class="container">
+            <div class="tos-breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span>Terms of Service</span>
+            </div>
+            <h1 class="tos-title">Terms of Service</h1>
+            <p class="tos-updated">Effective Date: January 1, 2026 &bull; Last Updated: October 2026</p>
+        </div>
+    </header>
+
+    <!-- TERMS CONTENT SECTION -->
+    <section class="tos-section">
+        <div class="container">
+            <div class="tos-layout">
+                
+                <!-- Left Sidebar Navigation -->
+                <aside class="tos-sidebar">
+                    <div class="tos-sidebar-title">
+                        <svg class="icon-svg" style="color: var(--secondary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        Table of Contents
+                    </div>
+                    <ul class="tos-nav-list">
+                        <li><a href="#acceptance">1. Acceptance of Terms</a></li>
+                        <li><a href="#services">2. Plumbing Services</a></li>
+                        <li><a href="#estimates">3. Estimates & Pricing</a></li>
+                        <li><a href="#appointments">4. Scheduling & Cancellations</a></li>
+                        <li><a href="#responsibilities">5. Customer Responsibilities</a></li>
+                        <li><a href="#warranty">6. Warranty & Guarantees</a></li>
+                        <li><a href="#liability">7. Limitation of Liability</a></li>
+                        <li><a href="#changes">8. Modifications to Terms</a></li>
+                        <li><a href="#contact">9. Contact Information</a></li>
+                    </ul>
+                </aside>
+
+                <!-- Right Main Content -->
+                <div class="tos-content-card">
+                    
+                    <div class="tos-intro">
+                        <strong>Welcome to TrustyPlumb!</strong> Please read these Terms of Service ("Terms") carefully before using our website or booking any residential or commercial plumbing services with us. By accessing our website or scheduling a service appointment, you agree to be bound by the terms and conditions outlined below.
+                    </div>
+
+                    <!-- Section 1 -->
+                    <div id="acceptance" class="tos-block">
+                        <h2><span class="tos-num">1</span> Acceptance of Terms</h2>
+                        <p>By accessing this website, calling our service numbers, or engaging TrustyPlumb ("Company", "we", "our", or "us") to perform plumbing services, you acknowledge that you have read, understood, and agree to comply with these Terms of Service. If you do not agree with any part of these terms, please refrain from using our website or services.</p>
+                    </div>
+
+                    <!-- Section 2 -->
+                    <div id="services" class="tos-block">
+                        <h2><span class="tos-num">2</span> Plumbing Services & Scope</h2>
+                        <p>TrustyPlumb provides residential and commercial plumbing solutions, including but not limited to leak detection and repair, drain cleaning, water heater repair and installation, pipe installation, and 24/7 emergency plumbing response.</p>
+                        <ul class="tos-list">
+                            <li>All services are performed by trained, licensed, and insured technicians.</li>
+                            <li>The exact scope of work will be assessed on-site and discussed with you prior to commencing any major repairs or installations.</li>
+                            <li>We reserve the right to refuse service if a property presents hazardous, unsafe, or unsanitary working conditions for our technicians.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 3 -->
+                    <div id="estimates" class="tos-block">
+                        <h2><span class="tos-num">3</span> Estimates, Pricing & Payments</h2>
+                        <p>We believe in upfront, transparent pricing with no hidden costs. Before any work begins, our technician will diagnose the issue and provide a clear estimate for your approval.</p>
+                        <ul class="tos-list">
+                            <li><strong>Upfront Estimates:</strong> Quotes provided over the phone are general estimates only. Final flat-rate pricing is determined after an on-site inspection.</li>
+                            <li><strong>Additional Work:</strong> If hidden damage or unforeseen complications are discovered after work begins, we will immediately inform you and obtain your authorization before incurring any extra charges.</li>
+                            <li><strong>Payment Terms:</strong> Full payment is due upon completion of the plumbing service unless otherwise agreed upon in writing prior to the service.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 4 -->
+                    <div id="appointments" class="tos-block">
+                        <h2><span class="tos-num">4</span> Scheduling, Cancellations & Emergencies</h2>
+                        <p>We value your time and strive to arrive within the scheduled appointment window. However, due to the unpredictable nature of emergency plumbing repairs, arrival times may occasionally shift.</p>
+                        <p>If you need to reschedule or cancel a routine appointment, we kindly ask that you notify us at least <strong>24 hours in advance</strong> so we can accommodate other customers experiencing urgent plumbing needs.</p>
+                    </div>
+
+                    <!-- Section 5 -->
+                    <div id="responsibilities" class="tos-block">
+                        <h2><span class="tos-num">5</span> Customer Responsibilities</h2>
+                        <p>To ensure our technicians can complete the job safely and efficiently, the customer agrees to provide the following:</p>
+                        <ul class="tos-list">
+                            <li>Clear and unobstructed access to the work area, including sinks, water heaters, crawl spaces, and main water shut-off valves.</li>
+                            <li>A safe environment where pets are secured away from the active work zone.</li>
+                            <li>Authorization from the property owner or an authorized adult (18 years or older) present on-site during the service visit.</li>
+                            <li>Access to basic utilities such as water and electricity required to test and repair the plumbing system.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 6 -->
+                    <div id="warranty" class="tos-block">
+                        <h2><span class="tos-num">6</span> Workmanship Warranty & Guarantees</h2>
+                        <p>We stand behind our craftsmanship. TrustyPlumb guarantees our workmanship for a specified period depending on the type of repair or installation performed (details will be stated on your service invoice).</p>
+                        <p>Please note that manufacturer warranties apply to parts, fixtures, and water heaters supplied by us. Our warranty does not cover issues caused by customer misuse, pre-existing corroded piping, root intrusion after standard drain cleaning, acts of nature, or tampering by unauthorized third parties.</p>
+                    </div>
+
+                    <!-- Section 7 -->
+                    <div id="liability" class="tos-block">
+                        <h2><span class="tos-num">7</span> Limitation of Liability</h2>
+                        <p>To the maximum extent permitted by law, TrustyPlumb shall not be held liable for any indirect, incidental, or consequential damages resulting from pre-existing water damage, mold, structural defects, or the failure of aging plumbing infrastructure not directly worked on by our technicians.</p>
+                        <p>In the event of necessary wall, ceiling, or floor access to reach concealed pipes, TrustyPlumb is not responsible for drywall patching, painting, tiling, or cosmetic restoration unless explicitly included in your written service agreement.</p>
+                    </div>
+
+                    <!-- Section 8 -->
+                    <div id="changes" class="tos-block">
+                        <h2><span class="tos-num">8</span> Modifications to Terms</h2>
+                        <p>TrustyPlumb reserves the right to update or modify these Terms of Service at any time without prior notice. Any changes will be posted directly on this page with an updated revision date. Your continued use of our website and services constitutes acceptance of the revised terms.</p>
+                    </div>
+
+                    <!-- Section 9 -->
+                    <div id="contact" class="tos-block">
+                        <h2><span class="tos-num">9</span> Contact Us</h2>
+                        <p>If you have any questions, concerns, or require clarification regarding our Terms of Service, please reach out to our customer support team:</p>
+                        
+                        <div class="tos-contact-box">
+                            <div class="tos-contact-info">
+                                <h4>Have Questions About Our Terms?</h4>
+                                <p>Email us at <strong>service@trustyplumb.com</strong> or call our 24/7 support line.</p>
+                            </div>
+                            <a href="tel:+1 877 346 0820" class="tos-btn">
+                                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                +1 (877) 346 0820
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+  <footer class="footer-containerfoofon">
+        <div class="fe-container">
+              <div class="curve-dividerfoofon">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path class="shape-fillfoofon" d="M0,32L60,42.7C120,53,240,75,360,80C480,85,600,75,720,58.7C840,43,960,21,1080,16C1200,11,1320,21,1380,26.7L1440,32V0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+            </svg>
+        </div>
+            <!-- Main Grid for 4 Columns -->
+        <div class="fe-footer-grid">
+            
+           <!-- Column 1: Brand & Description -->
+            <div class="fe-footer-col">
+              
+<a href="index.html" class="fe-brand-header">
+
+                     <div class="ser-image-container">
+                   <img src="image/logo.png" alt="Logo" style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%;">
+                </div>
+                    <h2 class="fe-brand-title">Trusty<span class="fe-text-cyan">Plumb</span></h2>
+                </a>
+                <p class="fe-brand-desc">
+                    Your trusted partner for all residential and commercial plumbing needs. We fix it right, day or night.
+                </p>
+            </div>
+
+       
+                  <!-- Column 2: Quick Links -->
+                <div class="fe-footer-col">
+                    <h3 class="fe-footer-heading">Quick Links</h3>
+                    <ul class="fe-footer-list">
+                        <li>
+                            <a href="#">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Reviews.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                REVIEWS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Team.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                MEET OUR TEAM
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Privacy Policy.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href=" Terms of service.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Terms of service
+                            </a>
+                        </li>
+	 <li>
+                            <a href=" tel:+13214858055" >
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                 Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Our Services -->
+                <div class="fe-footer-col">
+                    <h3 class="fe-footer-heading">Our Services</h3>
+                    <ul class="fe-footer-list">
+                        <li>
+                            <a href="Leak Repair.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Leak Repair
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Drain Cleaning.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Drain Cleaning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Water Heaters.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Water Heaters
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Pipe Installation.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Pipe Installation
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Commercial Plumbing.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Commercial Plumbing
+                            </a>
+                        </li>
+   <li>
+                            <a href="Emergency Plumbing.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                24/7 Emergency
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact Info -->
+                <div class="fe-footer-col">
+                    <h3 class="fe-footer-heading">Contact Info</h3>
+                    
+                    <!-- Phone -->
+                    <div class="fe-contact-item">
+                        <svg class="fe-contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <a href="tel:8005550199" class="fe-contact-text fe-large">
+                            (800) 555-0199
+                        </a>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="fe-contact-item">
+                        <svg class="fe-contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <a href="mailto:service@trustyplumb.com" class="fe-contact-text">
+                            service@trustyplumb.com
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+
+             <!-- Bottom Bar -->
+            <div class="fe-footer-bottom">
+                <div class="fe-copyright">
+                    &copy; 2026 TrustyPlumb. All rights reserved.
+                </div>
+                <div class="fe-bottom-links">
+                    <a href="Privacy Policy.html">Privacy Policy</a>
+                    <a href=" Terms of service.html">Terms of Service</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const servicesDropdown = document.getElementById('servicesDropdown');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('ser-active');
+            const spans = menuToggle.getElementsByTagName('span');
+            if(navMenu.classList.contains('ser-active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        servicesDropdown.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                const trigger = e.target.closest('.ser-dropdown-trigger');
+                if (trigger) {
+                    e.preventDefault();
+                    servicesDropdown.classList.toggle('ser-mobile-open');
+                }
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                navMenu.classList.remove('ser-active');
+                servicesDropdown.classList.remove('ser-mobile-open');
+            }
+        });
+    </script>
+</body>
+</html>

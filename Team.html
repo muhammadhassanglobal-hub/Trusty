@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustyPlumb-Meet OurTeams</title>
+    <link rel="icon" type="image/png" href="image/logo.png">
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <style>
+        /* Base Configuration - White, Deep Blue & Cyan Theme */
+        :root {
+            --tw-dark-blue: #003B5C;
+            --tw-light-blue: #00AEEF;
+            --bg-gray: #f0f9ff; 
+            --white: #ffffff;
+            --text-gray: #64748b;
+            --slate-900: #0B1320;
+            --slate-600: #334155;
+            --blue-600: #00AEEF;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Variables from he fe.html */
+            --primary-color: #0284c7;
+            --primary-hover: #0369a1;
+            --dark-bg: #0f172a; 
+            --light-bg: #f0f9ff;
+            --bg-alt: #e0f2fe;
+            --text-main: #334155;
+            --color-deepblue: #0B1320;
+            --color-cyan: #22d3ee;
+            --color-cyan-hover: #67e8f9;
+            --color-text-light: #ffffff;
+            --color-text-gray: #9ca3af;
+            --color-border: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--white);
+            color: var(--slate-900);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Essential Layout Helpers */
+        .max-w-7xl { max-width: 80rem; margin: 0 auto; width: 100%; }
+        .px-4 { padding-left: clamp(1rem, 4vw, 1.5rem); padding-right: clamp(1rem, 4vw, 1.5rem); }
+        .py-24 { padding-top: clamp(3.5rem, 8vw, 6rem); padding-bottom: clamp(3.5rem, 8vw, 6rem); }
+        .text-center { text-align: center; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .gap-6 { gap: 1.5rem; }
+
+        /* =========================================
+           Navbar Styling (Exact from he fe.html)
+           ========================================= */
+        .ser-navbar {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 95px;
+            display: flex;
+            align-items: center;
+            border-bottom: 4px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .ser-nav-container {
+            max-width: 1250px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ser-logo-section { display: flex; align-items: center; gap: 15px; text-decoration: none; transition: all 0.3s ease-in-out; }
+        .ser-logo-section:hover { transform: scale(1.02); }
+
+        .ser-image-container {
+            width: 55px; height: 55px; border-radius: 50%; border: 3px solid var(--tw-light-blue);
+            display: flex; align-items: center; justify-content: center; background-color: var(--white);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;
+        }
+        .ser-image-container img { width: 70%; height: auto; object-fit: contain; }
+        .ser-logo-text { display: flex; flex-direction: column; line-height: 1; }
+        .ser-brand-name { font-size: 1.8rem; font-weight: 800; color: var(--tw-dark-blue); letter-spacing: -0.5px; }
+        .ser-brand-name span { color: var(--tw-light-blue); }
+        .ser-sub-text { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-gray); font-weight: 700; margin-top: 2px; }
+
+        .ser-nav-menu { display: flex; align-items: center; gap: 15px; list-style: none; }
+        .ser-nav-link, .ser-dropdown-trigger {
+            text-decoration: none; font-size: 0.85rem; font-weight: 700; color: var(--tw-dark-blue);
+            padding: 10px 15px; border-radius: 8px; transition: all 0.3s ease-in-out; display: flex; align-items: center;
+            gap: 6px; text-transform: uppercase; cursor: pointer; border: none; background: transparent;
+        }
+        .ser-nav-link:hover, .ser-dropdown-trigger:hover { color: var(--tw-light-blue); background: rgba(0, 174, 239, 0.08); }
+
+        .ser-dropdown-container { position: relative; }
+        .ser-n-arrow { font-size: 0.7rem; transition: transform 0.3s ease; color: var(--tw-light-blue); }
+        .ser-dropdown-container:hover .ser-n-arrow { transform: rotate(180deg); }
+
+        .ser-dropdown {
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--white);
+            min-width: 240px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+            list-style: none; padding: 8px; opacity: 0; visibility: hidden; transition: all 0.3s ease-in-out;
+            border: 1px solid rgba(0,0,0,0.05); z-index: 1100; margin-top: 10px;
+        }
+        .ser-dropdown::before {
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
+            width: 12px; height: 12px; background: var(--white); border-left: 1px solid rgba(0,0,0,0.05); border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        .ser-dropdown-container:hover .ser-dropdown { opacity: 1; visibility: visible; }
+        .ser-dropdown li a { display: block; padding: 12px 16px; color: var(--tw-dark-blue); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-radius: 6px; transition: all 0.3s ease-in-out; }
+        .ser-dropdown li a:hover { background: var(--tw-light-blue); color: var(--white); }
+
+        .ser-call-btn {
+            margin-left: 10px; padding: 12px 28px; background-color: var(--white); border: 2px solid var(--tw-dark-blue);
+            border-radius: 10px; text-decoration: none; font-weight: 800; font-size: 0.85rem; color: var(--tw-dark-blue);
+            transition: all 0.2s ease; box-shadow: 0 4px 0 var(--tw-dark-blue); text-transform: uppercase; display: inline-block; text-align: center;
+        }
+        .ser-call-btn:hover { box-shadow: 0 6px 0 var(--tw-dark-blue); color: var(--tw-light-blue); border-color: var(--tw-light-blue); }
+        .ser-call-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--tw-dark-blue); }
+
+        .ser-menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; background: none; border: none; padding: 10px; }
+        .ser-menu-toggle span { width: 30px; height: 3px; background-color: var(--tw-dark-blue); border-radius: 3px; transition: all 0.3s ease-in-out; }
+
+        @media (max-width: 992px) {
+            .ser-menu-toggle { display: flex; }
+            .ser-nav-menu {
+                position: absolute; top: 95px; left: 0; width: 100%; background-color: var(--white); flex-direction: column;
+                padding: 10px 0; display: none; border-top: 1px solid #eee; gap: 0; max-height: calc(100vh - 95px); overflow-y: auto; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            }
+            .ser-nav-menu.ser-active { display: flex; }
+            .ser-nav-menu li { width: 100%; border-bottom: 1px solid #f1f5f9; }
+            .ser-nav-link, .ser-dropdown-trigger { width: 100%; padding: 18px 24px; border-radius: 0; justify-content: space-between; font-size: 0.95rem; }
+            .ser-dropdown { position: static; transform: none; width: 100%; opacity: 1; visibility: visible; display: none; box-shadow: none; background: #f8fafc; padding: 0 0 0 20px; border: none; margin-top: 0; }
+            .ser-dropdown::before { display: none; }
+            .ser-dropdown-container.ser-mobile-open .ser-dropdown { display: block; }
+            .ser-dropdown-container.ser-mobile-open .ser-n-arrow { transform: rotate(180deg); }
+            .ser-call-btn { margin: 20px 24px; display: block; box-shadow: 0 4px 0 var(--tw-dark-blue); }
+        }
+
+        /* Hero Section Styling (White, Deep Blue & Cyan) */
+        .hero-section {
+            padding: clamp(40px, 8vw, 80px) 20px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+            min-height: calc(100vh - 95px);
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e0f2fe;
+        }
+
+        .hero-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: clamp(2rem, 6vw, 5rem);
+            align-items: center;
+        }
+
+        .hero-content {
+            flex: 1 1 min(100%, 450px);
+        }
+
+        .hero-image-col {
+            flex: 1 1 min(100%, 450px);
+            width: 100%;
+        }
+
+        .hero-image-col img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: clamp(1.5rem, 4vw, 3rem);
+            border: 4px solid var(--color-cyan);
+            box-shadow: 0 20px 40px rgba(0, 59, 92, 0.2);
+        }
+
+        .hero-badge {
+            background: var(--tw-dark-blue); 
+            color: var(--color-cyan); 
+            padding: 8px 18px; 
+            border-radius: 999px; 
+            font-weight: 800; 
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+            display: inline-block;
+            border: 1px solid var(--color-cyan);
+        }
+
+        .hero-title {
+            font-size: clamp(2.1rem, 5vw, 4rem); 
+            font-weight: 900; 
+            margin: 20px 0; 
+            line-height: 1.15;
+            color: var(--tw-dark-blue);
+        }
+
+        .hero-desc {
+            color: var(--slate-600); 
+            font-size: clamp(1rem, 2.5vw, 1.2rem); 
+            margin-bottom: clamp(20px, 4vw, 35px);
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex; 
+            gap: 15px; 
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            background: var(--tw-dark-blue); 
+            color: var(--white); 
+            padding: clamp(12px, 3vw, 18px) clamp(24px, 5vw, 35px); 
+            border-radius: 12px; 
+            text-decoration: none; 
+            font-weight: 800; 
+            border: 2px solid var(--color-cyan);
+            box-shadow: 0 10px 15px rgba(0, 59, 92, 0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            flex: 1 1 auto;
+        }
+        
+        .hero-btn:hover {
+            background: var(--tw-light-blue);
+            color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 174, 239, 0.35);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating { 
+            animation: floating 4s ease-in-out infinite; 
+            transition: transform 0.5s ease;
+        }
+        .floating:hover {
+            transform: scale(1.02) translateY(-10px);
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, var(--tw-dark-blue), var(--tw-light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--tw-light-blue);
+        }
+
+        /* ----------------------------------------- */
+        /* ABOUT SECTION                             */
+        /* ----------------------------------------- */
+        .about-grid { 
+            display: flex; 
+            flex-direction: row; 
+            align-items: center; 
+            gap: clamp(2rem, 5vw, 4rem);
+            flex-wrap: wrap;
+        }
+        .about-img-wrapper {
+            flex: 1 1 min(100%, 400px);
+        }
+        .about-img-wrapper img {
+            width: 100%;
+            height: auto;
+            max-height: 460px;
+            object-fit: cover;
+            border-radius: clamp(1.5rem, 4vw, 2rem);
+            border: 3px solid var(--color-cyan);
+            box-shadow: 0 20px 40px rgba(0, 59, 92, 0.15);
+        }
+        .about-content {
+            flex: 1.2 1 min(100%, 450px);
+        }
+        
+        .feature-container { 
+            display: flex; 
+            gap: clamp(1rem, 3vw, 1.5rem); 
+            margin-top: 2rem; 
+            flex-wrap: wrap;
+        }
+        .feature-card {
+            background: var(--light-bg);
+            padding: clamp(1rem, 3vw, 1.5rem);
+            border-radius: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            flex: 1 1 min(100%, 240px);
+            transition: all 0.4s ease;
+            border: 1px solid #bae6fd;
+            cursor: pointer;
+        }
+        .feature-card:hover {
+            transform: translateX(5px) translateY(-5px);
+            background: var(--white);
+            box-shadow: 0 15px 30px rgba(0, 174, 239, 0.15);
+            border-color: var(--tw-light-blue);
+        }
+        .feature-icon-box {
+            width: 45px; height: 45px;
+            background: var(--white); border-radius: 50%;
+            border: 2px solid var(--color-cyan);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            color: var(--tw-dark-blue);
+        }
+        .feature-card:hover .feature-icon-box {
+            background: var(--tw-dark-blue);
+            color: var(--color-cyan);
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* ----------------------------------------- */
+        /* RESPONSIVE GRIDS                          */
+        /* ----------------------------------------- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+            gap: clamp(1.2rem, 3vw, 30px);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+            gap: clamp(1.2rem, 3vw, 25px);
+        }
+
+        .stats-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)); 
+            gap: clamp(1.5rem, 5vw, 40px); 
+            text-align: center;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+            gap: clamp(1.2rem, 3vw, 30px);
+        }
+
+        /* ----------------------------------------- */
+        /* CARDS STYLING                             */
+        /* ----------------------------------------- */
+        .section-title {
+            font-size: clamp(1.85rem, 4vw, 2.6rem); 
+            font-weight: 800; 
+            margin-bottom: clamp(30px, 6vw, 55px);
+            line-height: 1.2;
+            color: var(--tw-dark-blue);
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: clamp(28px, 5vw, 45px);
+            border-radius: clamp(1rem, 4vw, 25px);
+            box-shadow: 0 6px 15px rgba(0, 59, 92, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #bae6fd;
+            cursor: pointer;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--tw-dark-blue), var(--tw-light-blue));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0, 174, 239, 0.18);
+            border-color: var(--tw-light-blue);
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        
+        .service-icon {
+            font-size: clamp(2.5rem, 5vw, 3.5rem); 
+            margin-bottom: 20px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+        }
+        .service-card:hover .service-icon { transform: scale(1.2) rotate(8deg); }
+
+        /* Team Cards (Flip Cards) */
+        .flip-card { 
+            height: 390px; 
+            perspective: 1000px; 
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border-radius: 1.5rem;
+        }
+        .flip-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px rgba(0, 59, 92, 0.2);
+            z-index: 10;
+        }
+        .flip-card-inner {
+            position: relative; width: 100%; height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; border-radius: 1.5rem;
+            overflow: hidden; box-shadow: 0 4px 10px rgba(0, 59, 92, 0.08);
+            background: var(--white);
+            border: 2px solid #e0f2fe;
+        }
+        .flip-card-front h4 {
+            color: var(--tw-dark-blue);
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+        .flip-card-back {
+            background: linear-gradient(135deg, var(--tw-dark-blue) 0%, var(--color-deepblue) 100%);
+            color: var(--white); transform: rotateY(180deg); padding: 2rem;
+            display: flex; flex-direction: column; justify-content: center;
+            border: 2px solid var(--color-cyan);
+        }
+        .flip-card-back h3 {
+            color: var(--color-cyan);
+            margin-bottom: 0.75rem;
+            font-size: 1.35rem;
+        }
+
+        /* Stats Section */
+        .stat-box { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: default; padding: 1rem; }
+        .stat-box:hover { transform: scale(1.08); text-shadow: 0 0 15px rgba(34, 211, 238, 0.6); }
+        .stat-number { font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 900; color: var(--color-cyan); }
+
+        /* Review Cards */
+        .review-card {
+            background: var(--white);
+            padding: clamp(25px, 5vw, 38px);
+            border-radius: clamp(1.2rem, 4vw, 28px);
+            box-shadow: 0 10px 20px rgba(0, 59, 92, 0.05);
+            text-align: left;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #bae6fd;
+            border-bottom: 5px solid var(--tw-dark-blue);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .review-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0, 174, 239, 0.18);
+            border-color: var(--tw-light-blue);
+            border-bottom: 5px solid var(--tw-light-blue);
+        }
+
+        /* =========================================
+           FOOTER (Exact from he fe.html)
+           ========================================= */
+        .fe-site-footer {
+            background-color: var(--color-deepblue);
+            color: var(--color-text-gray);
+            padding: 4rem 0 2rem 0;
+            border-top: 4px solid var(--color-cyan);
+        }
+
+        .fe-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        /* Grid Layout for Columns */
+        .fe-footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Tablet (2 columns) */
+        @media (min-width: 768px) {
+            .fe-footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop (4 columns) */
+        @media (min-width: 1024px) {
+            .fe-footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        /* --- Typography & Elements --- */
+        .fe-brand-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.25rem;
+            text-decoration: none;
+        }
+
+        .fe-footer-logo {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .fe-brand-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            letter-spacing: -0.025em;
+        }
+
+        .fe-text-cyan {
+            color: var(--color-cyan);
+        }
+
+        .fe-brand-desc {
+            font-size: 0.875rem;
+            line-height: 1.625;
+            padding-right: 1rem;
+        }
+
+        .fe-footer-heading {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Lists & Links --- */
+        .fe-footer-list {
+            list-style: none;
+        }
+
+        .fe-footer-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .fe-footer-list a {
+            display: flex;
+            align-items: center;
+            color: var(--color-text-gray);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .fe-footer-list a:hover {
+            color: var(--color-cyan);
+        }
+
+        /* Icons in links */
+        .fe-link-icon {
+            width: 1rem;
+            height: 1rem;
+            color: var(--color-cyan);
+            margin-right: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .fe-footer-list a:hover .fe-link-icon {
+            transform: translateX(4px);
+        }
+
+        /* --- Contact specific styles --- */
+        .fe-contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .fe-contact-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: var(--color-cyan);
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .fe-contact-text {
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .fe-contact-text.fe-large {
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .fe-contact-text:hover {
+            color: var(--color-cyan);
+        }
+
+        /* --- Bottom Bar --- */
+        .fe-footer-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.875rem;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .fe-footer-bottom {
+                flex-direction: row;
+                text-align: left;
+            }
+        }
+
+        .fe-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .fe-bottom-links a {
+            color: var(--color-text-gray);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .fe-bottom-links a:hover {
+            color: var(--color-cyan);
+        }
+        .footer-containerfoofon { background: linear-gradient(145deg, #020617, #0f172a); color: var(--white); position: relative; padding-top: clamp(80px, 12vw, 120px); padding-bottom: 30px; display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .curve-dividerfoofon { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; transform: translateY(-1px); }
+        .curve-dividerfoofon svg { display: block; width: 100%; height: clamp(40px, 6vw, 80px); }
+        .curve-dividerfoofon .shape-fillfoofon { fill: var(--white); }
+
+        /* ----------------------------------------- */
+        /* MEDIA QUERIES FOR MOBILE OPTIMIZATION     */
+        /* ----------------------------------------- */
+        @media (max-width: 768px) {
+            .hero-section { min-height: auto; text-align: center; padding: 3rem 1.25rem; }
+            .hero-buttons { justify-content: center; flex-direction: column; width: 100%; }
+            .hero-btn { width: 100%; }
+            .about-grid { flex-direction: column; }
+            .about-content { text-align: center; }
+            .feature-container { flex-direction: column; align-items: center; }
+            .feature-card { width: 100%; text-align: left; }
+            .flip-card { height: 360px; }
+        }
+    </style>
+</head>
+<body>
+
+     <!-- NAVBAR (Exact from he fe.html) -->
+    <nav class="ser-navbar">
+        <div class="ser-nav-container">
+            
+            <a href="index.html" class="ser-logo-section">
+   <div class="ser-image-container">
+                   <img src="image/logo.png" alt="Logo" style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%;">
+                </div>
+             
+                <div class="ser-logo-text">
+                    <span class="ser-brand-name">Trusty<span>Plumb</span></span>
+                  
+                </div>
+            </a>
+
+            <ul class="ser-nav-menu" id="navMenu">
+                <li><a href="#" class="ser-nav-link">Home</a></li>
+                
+                <li class="ser-dropdown-container" id="servicesDropdown">
+                    <button class="ser-dropdown-trigger">
+                        Services <span class="ser-n-arrow">▼</span>
+                    </button>
+                    <ul class="ser-dropdown">
+                        <li><a href="Leak Repair.html">Leak Repair</a></li>
+                       
+                        <li><a href="Drain Cleaning.html">Drain Cleaning</a></li>
+                        <li><a href="Water Heaters.html">Water Heaters</a></li>
+                        
+                        <li><a href="Pipe Installation.html">Pipe Installation</a></li>
+                        <li><a href="Commercial Plumbing.html">Commercial Plumbing</a></li>
+                           <li><a href="Emergency Plumbing.html">24/7 Emergency</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="Reviews.html" class="ser-nav-link">Trusted Reviews</a></li>
+                <li><a href="Team.html" class="ser-nav-link">Meet Our Team</a></li>
+                <li><a href="tel:+1 877 346 0820" class="ser-call-btn">Call Now</a></li>
+            </ul>
+
+            <button class="ser-menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero-section reveal">
+        <div class="max-w-7xl hero-wrapper">
+            <div class="hero-content">
+                <span class="hero-badge">✓ Trusted by 25,000+ Homeowners & Businesses</span>
+                <h1 class="hero-title">Expert Plumbing Care by <span class="gradient-text">TrustyPlumb</span></h1>
+                <p class="hero-desc">Meet our state-licensed master plumbers delivering permanent solutions for leak repair, drain cleaning, water heaters, pipe installation, commercial plumbing, and 24/7 emergencies.</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="hero-btn">Our Plumbing Services →</a>
+                    <a href="#team" class="hero-btn">Meet Master Plumbers</a>
+                </div>
+            </div>
+            <div class="hero-image-col floating">
+                <img src="https://i.pinimg.com/736x/6d/66/af/6d66af4d10a9a7d19d1df880b0ce3b23.jpg" alt="TrustyPlumb Master Plumber at Work">
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Excellence Section -->
+    <section id="about" class="py-24 reveal" style="background: var(--white);">
+        <div class="max-w-7xl px-4">
+            <div class="about-grid">
+                <!-- Left: Image Section -->
+                <div class="about-img-wrapper">
+                    <img src="https://i.pinimg.com/1200x/8f/e0/41/8fe0411588de2cc784b953370cdbafd7.jpg" alt="TrustyPlumb Plumbing Inspection">
+                </div>
+                
+                <!-- Right: Content Section -->
+                <div class="about-content">
+                    <p style="color: var(--tw-light-blue); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.15rem; margin-bottom: 1rem; text-transform: uppercase;">Plumbing Excellence</p>
+                    <h2 class="section-title" style="margin-bottom: 1.5rem;">Your Reliable Partner in Residential & Commercial Plumbing</h2>
+                    <p style="color: var(--slate-600); font-size: clamp(1rem, 2.5vw, 1.1rem); line-height: 1.8; margin-bottom: 2rem;">
+                        Since 2015, <strong>TrustyPlumb</strong> has provided dependable plumbing solutions to thousands of homes and commercial properties. Because a single leak or sewer backup can disrupt your entire property, we only employ certified, background-checked master plumbers.
+                    </p>
+                    
+                    <!-- Features Row -->
+                    <div class="feature-container">
+                        <!-- Feature 1 -->
+                        <div class="feature-card">
+                            <div class="feature-icon-box">🕒</div>
+                            <div>
+                                <h4 style="font-weight: 800; color: var(--tw-dark-blue); margin-bottom: 5px; font-size: 1.1rem;">24/7 Rapid Dispatch</h4>
+                                <p style="font-size: 0.9rem; color: var(--slate-600);">Fully stocked plumbing trucks ready day or night.</p>
+                            </div>
+                        </div>
+                        <!-- Feature 2 -->
+                        <div class="feature-card">
+                            <div class="feature-icon-box">💧</div>
+                            <div>
+                                <h4 style="font-weight: 800; color: var(--tw-dark-blue); margin-bottom: 5px; font-size: 1.1rem;">Upfront Flat Pricing</h4>
+                                <p style="font-size: 0.9rem; color: var(--slate-600);">Transparent plumbing quotes with zero hidden fees.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (6 Services from Navbar) -->
+    <section id="services" class="py-24 reveal" style="background: var(--light-bg);">
+        <div class="max-w-7xl px-4 text-center">
+            <h2 class="section-title">TrustyPlumb Specialized Services</h2>
+            <div class="services-grid">
+                <!-- 1 -->
+                <div class="service-card" onclick="window.location.href='Leak Repair.html'">
+                    <div class="service-icon">💧</div>
+                    <h3 style="font-weight: 800; margin-bottom: 15px; font-size: 1.25rem; color: var(--tw-dark-blue);">Leak Repair</h3>
+                    <p style="color: var(--slate-600); font-size: 0.95rem;">Electronic slab leak detection and permanent repair for hidden pipe, faucet, and fixture leaks.</p>
+                </div>
+                <!-- 2 -->
+                <div class="service-card" onclick="window.location.href='Drain Cleaning.html'">
+                    <div class="service-icon">🌀</div>
+                    <h3 style="font-weight: 800; margin-bottom: 15px; font-size: 1.25rem; color: var(--tw-dark-blue);">Drain Cleaning</h3>
+                    <p style="color: var(--slate-600); font-size: 0.95rem;">High-pressure hydro-jetting and rooter service to clear stubborn sewer and drain blockages.</p>
+                </div>
+                <!-- 3 -->
+                <div class="service-card" onclick="window.location.href='Water Heaters.html'">
+                    <div class="service-icon">🔥</div>
+                    <h3 style="font-weight: 800; margin-bottom: 15px; font-size: 1.25rem; color: var(--tw-dark-blue);">Water Heaters</h3>
+                    <p style="color: var(--slate-600); font-size: 0.95rem;">Same-day repair, flushing, and installation of energy-efficient tank and tankless water heaters.</p>
+                </div>
+                <!-- 4 -->
+                <div class="service-card" onclick="window.location.href='Pipe Installation.html'">
+                    <div class="service-icon">🔧</div>
+                    <h3 style="font-weight: 800; margin-bottom: 15px; font-size: 1.25rem; color: var(--tw-dark-blue);">Pipe Installation</h3>
+                    <p style="color: var(--slate-600); font-size: 0.95rem;">Whole-home copper and PEX repiping, main water line installation, and gas pipe fitting.</p>
+                </div>
+                <!-- 5 -->
+                <div class="service-card" onclick="window.location.href='Commercial Plumbing.html'">
+                    <div class="service-icon">🏢</div>
+                    <h3 style="font-weight: 800; margin-bottom: 15px; font-size: 1.25rem; color: var(--tw-dark-blue);">Commercial Plumbing</h3>
+                    <p style="color: var(--slate-600); font-size: 0.95rem;">Grease trap maintenance, backflow certification, and heavy-duty commercial plumbing systems.</p>
+                </div>
+                <!-- 6 -->
+                <div class="service-card" onclick="window.location.href='Emergency Plumbing.html'">
+                    <div class="service-icon">🚨</div>
+                    <h3 style="font-weight: 800; margin-bottom: 15px; font-size: 1.25rem; color: var(--tw-dark-blue);">24/7 Emergency</h3>
+                    <p style="color: var(--slate-600); font-size: 0.95rem;">Round-the-clock emergency response for burst pipes, sewer backups, and flooding.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section (16 Plumbing Specialists) -->
+    <section id="team" class="py-24 reveal" style="background: var(--white);">
+        <div class="max-w-7xl px-4 text-center">
+            <h2 class="section-title">Meet Our TrustyPlumb Specialists</h2>
+            <div class="team-grid">
+                <!-- Member 1 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?auto=format&fit=crop&q=80&w=400" alt="David" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>David Miller</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Master Plumber</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>15+ Years Exp.</h3><p>Lead TrustyPlumb specialist in tankless Water Heaters and whole-house PEX repiping.</p></div>
+                    </div>
+                </div>
+                <!-- Member 2 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80&w=400" alt="James" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>James Wilson</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Leak Repair Specialist</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Acoustic Detection</h3><p>Expert in non-invasive slab leak detection and precision copper pipe Leak Repair.</p></div>
+                    </div>
+                </div>
+                <!-- Member 3 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&q=80&w=400" alt="Marcus" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Marcus Garcia</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Drain Cleaning Lead</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Hydro-Jetting Pro</h3><p>Clears severe main sewer clogs and tree root intrusions using HD camera inspections.</p></div>
+                    </div>
+                </div>
+                <!-- Member 4 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400" alt="Alex" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Alex Reed</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Pipe Installation Pro</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Repiping Expert</h3><p>Specializes in replacing corroded galvanized pipes with high-pressure PEX and copper lines.</p></div>
+                    </div>
+                </div>
+                <!-- Member 5 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400" alt="Sarah" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Sarah Jenkins</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Water Heater Tech</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Hot Water Guru</h3><p>Certified installer and repair technician for hybrid, gas, and electric Water Heaters.</p></div>
+                    </div>
+                </div>
+                <!-- Member 6 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400" alt="Michael" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Michael Chang</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Commercial Plumber</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Commercial Systems</h3><p>Handles restaurant grease traps, commercial boilers, and multi-story plumbing networks.</p></div>
+                    </div>
+                </div>
+                <!-- Member 7 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Emily" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Emily Davis</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Emergency Dispatch Lead</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>24/7 Coordinator</h3><p>Coordinates rapid-response plumbing trucks so help reaches your door in under 30 minutes.</p></div>
+                    </div>
+                </div>
+                <!-- Member 8 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400" alt="Robert" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Robert Fox</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Sewer Line Specialist</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Trenchless Pros</h3><p>14+ years performing trenchless sewer line replacements and main Drain Cleaning.</p></div>
+                    </div>
+                </div>
+                <!-- Member 9 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400" alt="Jessica" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Jessica Taylor</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Backflow Tester</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Water Safety</h3><p>State-certified in Commercial Plumbing backflow prevention assembly testing and repair.</p></div>
+                    </div>
+                </div>
+                <!-- Member 10 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400" alt="William" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>William Brown</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">24/7 Emergency Plumber</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Night Shift Hero</h3><p>Specializes in late-night burst pipe containment, shut-off valves, and sump pump failures.</p></div>
+                    </div>
+                </div>
+                <!-- Member 11 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://static.vecteezy.com/system/resources/thumbnails/007/421/470/small/handsome-cheerful-bearded-man-smiles-gladfully-dressed-in-casual-white-t-shirt-being-in-good-mood-poses-against-blue-background-with-copy-space-glad-european-guy-with-stubble-stands-indoor-free-photo.jpg" alt="Thomas" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Thomas Brooks</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Gas & Pipe Fitter</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Precision Fitting</h3><p>Licensed in gas line Pipe Installation, pressure regulators, and main water shut-offs.</p></div>
+                    </div>
+                </div>
+                <!-- Member 12 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400" alt="Olivia" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Olivia Smith</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Water Filtration Pro</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Pure Water</h3><p>Installs whole-home water softeners, reverse osmosis systems, and eco-friendly fixtures.</p></div>
+                    </div>
+                </div>
+                <!-- Member 13 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&q=80&w=400" alt="Daniel" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Daniel Craig</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Slab Leak Technician</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Foundation Saver</h3><p>Uses thermal imaging to pinpoint hidden under-slab leaks without damaging your floors.</p></div>
+                    </div>
+                </div>
+                <!-- Member 14 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400" alt="Sophia" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Sophia Martinez</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Senior Drain Specialist</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Pipe Whisperer</h3><p>Fast, mess-free kitchen, bathroom, and storm Drain Cleaning solutions.</p></div>
+                    </div>
+                </div>
+                <!-- Member 15 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400" alt="Matthew" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Matthew Anderson</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Remodel Plumber</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Custom Fixtures</h3><p>Expert in luxury bathroom rough-ins, shower valve upgrades, and kitchen Pipe Installation.</p></div>
+                    </div>
+                </div>
+                <!-- Member 16 -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?auto=format&fit=crop&q=80&w=400" alt="Isabella" style="width: 100%; height: 75%; object-fit: cover;">
+                            <div style="padding: 15px;"><h4>Isabella Moore</h4><p style="color: var(--tw-light-blue); font-weight: 700; font-size: 0.85rem;">Quality Inspector</p></div>
+                        </div>
+                        <div class="flip-card-back"><h3>Code Compliance</h3><p>Ensures every TrustyPlumb repair and installation passes city plumbing codes 100%.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section with Running Numbers -->
+    <section class="py-24 reveal" style="background: linear-gradient(135deg, var(--tw-dark-blue), var(--color-deepblue)); color: var(--white); border-top: 4px solid var(--color-cyan); border-bottom: 4px solid var(--color-cyan);">
+        <div class="max-w-7xl px-4">
+            <div class="stats-grid">
+                <div class="stat-box"><div class="stat-number" data-target="75" data-suffix="k+">0</div><div style="color: #e0f2fe; font-weight: 700; font-size: clamp(0.9rem, 2vw, 1.1rem);">Plumbing Jobs Done</div></div>
+                <div class="stat-box"><div class="stat-number" data-target="99" data-suffix="%">0</div><div style="color: #e0f2fe; font-weight: 700; font-size: clamp(0.9rem, 2vw, 1.1rem);">Satisfied Clients</div></div>
+                <div class="stat-box"><div class="stat-number" data-target="150" data-suffix="+">0</div><div style="color: #e0f2fe; font-weight: 700; font-size: clamp(0.9rem, 2vw, 1.1rem);">Licensed Plumbers</div></div>
+                <div class="stat-box"><div class="stat-number" data-target="24" data-suffix="/7">0</div><div style="color: #e0f2fe; font-weight: 700; font-size: clamp(0.9rem, 2vw, 1.1rem);">Emergency Dispatch</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section (9 Plumbing Reviews for TrustyPlumb) -->
+    <section id="reviews" class="py-24 reveal" style="background: var(--light-bg);">
+        <div class="max-w-7xl px-4 text-center">
+            <h2 class="section-title">What Clients Say About Our Plumbers</h2>
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div>
+                        <div style="color: var(--tw-light-blue); margin-bottom: 15px; font-size: 1.25rem;">★★★★★</div>
+                        <p style="color: var(--slate-600); margin-bottom: 25px; font-size: 0.95rem; font-style: italic;">"James from TrustyPlumb arrived right on time and used electronic Leak Repair equipment to find a hidden pipe leak behind our kitchen wall. Spotless work!"</p>
+                    </div>
+                    <div style="font-weight: 800; color: var(--tw-dark-blue);">Linda Thompson • <span style="color: var(--tw-light-blue); font-size: 0.8rem;">Leak Repair</span></div>
+                </div>
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div>
+                        <div style="color: var(--tw-light-blue); margin-bottom: 15px; font-size: 1.25rem;">★★★★★</div>
+                        <p style="color: var(--slate-600); margin-bottom: 25px; font-size: 0.95rem; font-style: italic;">"Had a burst pipe emergency on Sunday night. TrustyPlumb sent William in 25 minutes and saved our basement from flooding. Truly lifesavers!"</p>
+                    </div>
+                    <div style="font-weight: 800; color: var(--tw-dark-blue);">Michael Cheng • <span style="color: var(--tw-light-blue); font-size: 0.8rem;">24/7 Emergency</span></div>
+                </div>
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div>
+                        <div style="color: var(--tw-light-blue); margin-bottom: 15px; font-size: 1.25rem;">★★★★★</div>
+                        <p style="color: var(--slate-600); margin-bottom: 25px; font-size: 0.95rem; font-style: italic;">"Upfront flat-rate pricing and super professional plumbers. TrustyPlumb handles all the Commercial Plumbing and grease traps for our restaurant."</p>
+                    </div>
+                    <div style="font-weight: 800; color: var(--tw-dark-blue);">Kevin Patel • <span style="color: var(--tw-light-blue); font-size: 0.8rem;">Commercial Plumbing</span></div>
+                </div>
+                <!-- Review 4 -->
+                <div class="review-card">
+                    <div>
+                        <div style="color: var(--tw-light-blue); margin-bottom: 15px; font-size: 1.25rem;">★★★★★</div>
+                        <p style="color: var(--slate-600); margin-bottom: 25px; font-size: 0.95rem; font-style: italic;">"David and Sarah installed our new tankless Water Heater in just two hours. They explained the maintenance clearly and hauled away the old tank."</p>
+                    </div>
+                    <div style="font-weight: 800; color: var(--tw-dark-blue);">Sarah Williams • <span style="color: var(--tw-light-blue); font-size: 0.8rem;">Water Heaters</span></div>
+                </div>
+                <!-- Review 5 -->
+                <div class="review-card">
+                    <div>
+                        <div style="color: var(--tw-light-blue); margin-bottom: 15px; font-size: 1.25rem;">★★★★★</div>
+                        <p style="color: var(--slate-600); margin-bottom: 25px; font-size: 0.95rem; font-style: italic;">"Our main sewer drain backed up completely. Marcus from TrustyPlumb performed hydro-jet Drain Cleaning and cleared tree roots the same afternoon!"</p>
+                    </div>
+                    <div style="font-weight: 800; color: var(--tw-dark-blue);">John Miller • <span style="color: var(--tw-light-blue); font-size: 0.8rem;">Drain Cleaning</span></div>
+                </div>
+                <!-- Review 6 -->
+                <div class="review-card">
+                    <div>
+                        <div style="color: var(--tw-light-blue); margin-bottom: 15px; font-size: 1.25rem;">★★★★★</div>
+                        <p style="color: var(--slate-600); margin-bottom: 25px; font-size: 0.95rem; font-style: italic;">"Alex and his crew completed a full PEX Pipe Installation for our 1960s home in two days. Our water pressure has doubled and there was zero mess."</p>
+                    </div>
+                    <div style="font-weight: 800; color: var(--tw-dark-blue);">Emily Chen • <span style="color: var(--tw-light-blue); font-size: 0.8rem;">Pipe Installation</span></div>
+                </div>
+                <!-- Review 7 -->
+                <div class="review-card">
+                    <div>
+                        <div style="color: var(--tw-light-blue); margin-bottom: 15px; font-size: 1.25rem;">★★★★★</div>
+                        <p style="color: var(--slate-600); margin-bottom: 25px; font-size: 0.95rem; font-style: italic;">"Called TrustyPlumb for a slab leak under our foundation. Daniel pinpointed it with thermal imaging and fixed it without tearing up our tile floors."</p>
+                    </div>
+                    <div style="font-weight: 800; color: var(--tw-dark-blue);">Robert Johnson • <span style="color: var(--tw-light-blue); font-size: 0.8rem;">Leak Repair</span></div>
+                </div>
+                <!-- Review 8 -->
+                <div class="review-card">
+                    <div>
+                        <div style="color: var(--tw-light-blue); margin-bottom: 15px; font-size: 1.25rem;">★★★★★</div>
+                        <p style="color: var(--slate-600); margin-bottom: 25px; font-size: 0.95rem; font-style: italic;">"Sophia fixed our clogged kitchen sink and garbage disposal line for a fraction of what another company quoted. Very honest and polite team!"</p>
+                    </div>
+                    <div style="font-weight: 800; color: var(--tw-dark-blue);">Amanda Smith • <span style="color: var(--tw-light-blue); font-size: 0.8rem;">Drain Cleaning</span></div>
+                </div>
+                <!-- Review 9 -->
+                <div class="review-card">
+                    <div>
+                        <div style="color: var(--tw-light-blue); margin-bottom: 15px; font-size: 1.25rem;">★★★★★</div>
+                        <p style="color: var(--slate-600); margin-bottom: 25px; font-size: 0.95rem; font-style: italic;">"TrustyPlumb upgraded all the commercial flush valves and backflow preventers in our office plaza after hours with zero disruption to our tenants."</p>
+                    </div>
+                    <div style="font-weight: 800; color: var(--tw-dark-blue);">Chris Evans • <span style="color: var(--tw-light-blue); font-size: 0.8rem;">Commercial Plumbing</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section (Exact from he fe.html) -->
+    <footer class="footer-containerfoofon">
+        <div class="fe-container">
+              <div class="curve-dividerfoofon">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path class="shape-fillfoofon" d="M0,32L60,42.7C120,53,240,75,360,80C480,85,600,75,720,58.7C840,43,960,21,1080,16C1200,11,1320,21,1380,26.7L1440,32V0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+            </svg>
+        </div>
+            <!-- Main Grid for 4 Columns -->
+        <div class="fe-footer-grid">
+            
+           <!-- Column 1: Brand & Description -->
+            <div class="fe-footer-col">
+              
+<a href="index.html" class="fe-brand-header">
+
+                     <div class="ser-image-container">
+                   <img src="image/logo.png" alt="Logo" style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%;">
+                </div>
+                    <h2 class="fe-brand-title">Trusty<span class="fe-text-cyan">Plumb</span></h2>
+                </a>
+                <p class="fe-brand-desc">
+                    Your trusted partner for all residential and commercial plumbing needs. We fix it right, day or night.
+                </p>
+            </div>
+
+       
+                  <!-- Column 2: Quick Links -->
+                <div class="fe-footer-col">
+                    <h3 class="fe-footer-heading">Quick Links</h3>
+                    <ul class="fe-footer-list">
+                        <li>
+                            <a href="#">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Reviews.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                REVIEWS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Team.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                MEET OUR TEAM
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Privacy Policy.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href=" Terms of service.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Terms of service
+                            </a>
+                        </li>
+	 <li>
+                            <a href=" tel:+13214858055" >
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                 Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Our Services -->
+                <div class="fe-footer-col">
+                    <h3 class="fe-footer-heading">Our Services</h3>
+                    <ul class="fe-footer-list">
+                        <li>
+                            <a href="Leak Repair.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Leak Repair
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Drain Cleaning.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Drain Cleaning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Water Heaters.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Water Heaters
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Pipe Installation.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Pipe Installation
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Commercial Plumbing.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Commercial Plumbing
+                            </a>
+                        </li>
+   <li>
+                            <a href="Emergency Plumbing.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                24/7 Emergency
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact Info -->
+                <div class="fe-footer-col">
+                    <h3 class="fe-footer-heading">Contact Info</h3>
+                    
+                    <!-- Phone -->
+                    <div class="fe-contact-item">
+                        <svg class="fe-contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <a href="tel:8005550199" class="fe-contact-text fe-large">
+                            (800) 555-0199
+                        </a>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="fe-contact-item">
+                        <svg class="fe-contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <a href="mailto:service@trustyplumb.com" class="fe-contact-text">
+                            service@trustyplumb.com
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+
+             <!-- Bottom Bar -->
+            <div class="fe-footer-bottom">
+                <div class="fe-copyright">
+                    &copy; 2026 TrustyPlumb. All rights reserved.
+                </div>
+                <div class="fe-bottom-links">
+                    <a href="Privacy Policy.html">Privacy Policy</a>
+                    <a href=" Terms of service.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons Script (From he fe.html) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        // Numbers Run Animation Logic
+        const counterStats = document.querySelectorAll('.stat-number');
+
+        const runNumbers = (element) => {
+            const target = parseInt(element.getAttribute('data-target'));
+            const suffix = element.getAttribute('data-suffix');
+            let count = 0;
+            const speed = target / 50; 
+
+            const update = () => {
+                if (count < target) {
+                    count += speed;
+                    element.innerText = Math.ceil(count) + suffix;
+                    setTimeout(update, 30);
+                } else {
+                    element.innerText = target + suffix;
+                }
+            }
+            update();
+        };
+
+        // Scroll Observer for triggering number animation
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    runNumbers(entry.target);
+                    statObserver.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counterStats.forEach(stat => statObserver.observe(stat));
+
+        // ================= Initialize Icons & Navbar Scripts (From he fe.html) =================
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const servicesDropdown = document.getElementById('servicesDropdown');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('ser-active');
+            const spans = menuToggle.getElementsByTagName('span');
+            if(navMenu.classList.contains('ser-active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        servicesDropdown.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                const trigger = e.target.closest('.ser-dropdown-trigger');
+                if (trigger) {
+                    e.preventDefault();
+                    servicesDropdown.classList.toggle('ser-mobile-open');
+                }
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                navMenu.classList.remove('ser-active');
+                servicesDropdown.classList.remove('ser-mobile-open');
+            }
+        });
+
+        // --- Firebase Configuration & Auth Logic ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyC5fBfvrtbcDUJTdP5-jc9adfxJWc53n94",
+            authDomain: "auth-d7f3a.firebaseapp.com",
+            projectId: "auth-d7f3a",
+            storageBucket: "auth-d7f3a.firebasestorage.app",
+            messagingSenderId: "200460928170",
+            appId: "1:200460928170:web:923331402c31bda2a3bcd3"
+        };
+
+        // Initialize Firebase safely
+        if (typeof firebase !== 'undefined') {
+            firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+
+            auth.onAuthStateChanged((user) => {
+                const authBtn = document.getElementById('userAuthBtn');
+                if (authBtn) {
+                    if (user) {
+                        authBtn.textContent = "LOGOUT";
+                        authBtn.href = "javascript:void(0)";
+                        authBtn.onclick = function() {
+                            auth.signOut().then(() => {
+                                window.location.href = "Login.html";
+                            });
+                        };
+                    } else {
+                        authBtn.textContent = "LOGIN";
+                        authBtn.href = "Login.html";
+                        authBtn.onclick = null;
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

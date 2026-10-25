@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustyPlumb - Drain Cleaning</title>
+    <link rel="icon" type="image/png" href="image/logo.png">
+    
+    <style>
+        /* =========================================
+           Unified Blue Theme Variables (From he fe.html)
+           ========================================= */
+        :root {
+            --tw-dark-blue: #003B5C;
+            --tw-light-blue: #00AEEF;
+            --bg-gray: #e2e8f0;
+            --primary-color: #0284c7; /* Main Blue */
+            --primary-hover: #0369a1; /* Darker Blue */
+            --dark-bg: #0f172a; 
+            --light-bg: #f0f9ff; /* Very light blue for full site bg */
+            --bg-alt: #e0f2fe; /* Alternate light blue for sections */
+            --white: #ffffff;
+            --text-gray: #64748b;
+            --text-main: #334155;
+            --transition: all 0.3s ease-in-out;
+            --secondary-orange: #F97316;
+            --secondary-orange-hover: #ea580c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* =========================================
+           Navbar Styling (Unchanged)
+           ========================================= */
+        .ser-navbar {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 95px;
+            display: flex;
+            align-items: center;
+            border-bottom: 4px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .ser-nav-container {
+            max-width: 1250px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ser-logo-section { display: flex; align-items: center; gap: 15px; text-decoration: none; transition: var(--transition); }
+        .ser-logo-section:hover { transform: scale(1.02); }
+
+        .ser-image-container {
+            width: 55px; height: 55px; border-radius: 50%; border: 3px solid var(--tw-light-blue);
+            display: flex; align-items: center; justify-content: center; background-color: var(--white);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;
+        }
+        .ser-image-container img { width: 70%; height: auto; object-fit: contain; }
+        .ser-logo-text { display: flex; flex-direction: column; line-height: 1; }
+        .ser-brand-name { font-size: 1.8rem; font-weight: 800; color: var(--tw-dark-blue); letter-spacing: -0.5px; }
+        .ser-brand-name span { color: var(--tw-light-blue); }
+        .ser-sub-text { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-gray); font-weight: 700; margin-top: 2px; }
+
+        .ser-nav-menu { display: flex; align-items: center; gap: 15px; list-style: none; }
+        .ser-nav-link, .ser-dropdown-trigger {
+            text-decoration: none; font-size: 0.85rem; font-weight: 700; color: var(--tw-dark-blue);
+            padding: 10px 15px; border-radius: 8px; transition: var(--transition); display: flex; align-items: center;
+            gap: 6px; text-transform: uppercase; cursor: pointer; border: none; background: transparent;
+        }
+        .ser-nav-link:hover, .ser-dropdown-trigger:hover { color: var(--tw-light-blue); background: rgba(0, 174, 239, 0.08); }
+
+        .ser-dropdown-container { position: relative; }
+        .ser-n-arrow { font-size: 0.7rem; transition: transform 0.3s ease; color: var(--tw-light-blue); }
+        .ser-dropdown-container:hover .ser-n-arrow { transform: rotate(180deg); }
+
+        .ser-dropdown {
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--white);
+            min-width: 240px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+            list-style: none; padding: 8px; opacity: 0; visibility: hidden; transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05); z-index: 1100; margin-top: 10px;
+        }
+        .ser-dropdown::before {
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
+            width: 12px; height: 12px; background: var(--white); border-left: 1px solid rgba(0,0,0,0.05); border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        .ser-dropdown-container:hover .ser-dropdown { opacity: 1; visibility: visible; }
+        .ser-dropdown li a { display: block; padding: 12px 16px; color: var(--tw-dark-blue); text-decoration: none; font-size: 0.9rem; font-weight: 600; border-radius: 6px; transition: var(--transition); }
+        .ser-dropdown li a:hover { background: var(--tw-light-blue); color: var(--white); }
+
+        .ser-call-btn {
+            margin-left: 10px; padding: 12px 28px; background-color: var(--white); border: 2px solid var(--tw-dark-blue);
+            border-radius: 10px; text-decoration: none; font-weight: 800; font-size: 0.85rem; color: var(--tw-dark-blue);
+            transition: all 0.2s ease; box-shadow: 0 4px 0 var(--tw-dark-blue); text-transform: uppercase; display: inline-block; text-align: center;
+        }
+        .ser-call-btn:hover { box-shadow: 0 6px 0 var(--tw-dark-blue); color: var(--tw-light-blue); border-color: var(--tw-light-blue); }
+        .ser-call-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--tw-dark-blue); }
+
+        .ser-menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; background: none; border: none; padding: 10px; }
+        .ser-menu-toggle span { width: 30px; height: 3px; background-color: var(--tw-dark-blue); border-radius: 3px; transition: var(--transition); }
+
+        @media (max-width: 992px) {
+            .ser-menu-toggle { display: flex; }
+            .ser-nav-menu {
+                position: absolute; top: 95px; left: 0; width: 100%; background-color: var(--white); flex-direction: column;
+                padding: 10px 0; display: none; border-top: 1px solid #eee; gap: 0; max-height: calc(100vh - 95px); overflow-y: auto; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            }
+            .ser-nav-menu.ser-active { display: flex; }
+            .ser-nav-menu li { width: 100%; border-bottom: 1px solid #f1f5f9; }
+            .ser-nav-link, .ser-dropdown-trigger { width: 100%; padding: 18px 24px; border-radius: 0; justify-content: space-between; font-size: 0.95rem; }
+            .ser-dropdown { position: static; transform: none; width: 100%; opacity: 1; visibility: visible; display: none; box-shadow: none; background: #f8fafc; padding: 0 0 0 20px; border: none; margin-top: 0; }
+            .ser-dropdown::before { display: none; }
+            .ser-dropdown-container.ser-mobile-open .ser-dropdown { display: block; }
+            .ser-dropdown-container.ser-mobile-open .ser-n-arrow { transform: rotate(180deg); }
+            .ser-call-btn { margin: 20px 24px; display: block; box-shadow: 0 4px 0 var(--tw-dark-blue); }
+        }
+
+        /* =========================================
+           DRAIN CLEANING UNIQUE DESIGN & ANIMATIONS
+           ========================================= */
+        @keyframes dcFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-14px); }
+        }
+
+        @keyframes dcPulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 174, 239, 0.5); }
+            50% { box-shadow: 0 0 0 15px rgba(0, 174, 239, 0); }
+        }
+
+        @keyframes dcRipple {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        @keyframes dcSlideFade {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dc-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- 1. Modern Split Collage Hero --- */
+        .dc-hero {
+            position: relative;
+            padding: 75px 0 110px 0;
+            background: radial-gradient(circle at 85% 20%, #bae6fd 0%, #f0f9ff 55%, #ffffff 100%);
+            overflow: hidden;
+        }
+
+        .dc-water-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(0, 174, 239, 0.12), rgba(0, 59, 92, 0.05));
+            z-index: 0;
+            animation: dcRipple 8s infinite ease-in-out;
+        }
+        .dc-wc-1 { width: 500px; height: 500px; top: -120px; right: -100px; }
+        .dc-wc-2 { width: 320px; height: 320px; bottom: 20px; left: -80px; animation-delay: 3s; }
+
+        .dc-hero-wrapper {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 55px;
+            align-items: center;
+        }
+        @media (min-width: 992px) {
+            .dc-hero-wrapper { grid-template-columns: 1.05fr 0.95fr; }
+        }
+
+        .dc-pill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--white);
+            color: var(--tw-dark-blue);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(0, 59, 92, 0.08);
+            border: 1px solid #bae6fd;
+            margin-bottom: 22px;
+        }
+        .dc-pill-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--tw-light-blue);
+            border-radius: 50%;
+            animation: dcPulseGlow 2s infinite;
+        }
+
+        .dc-hero-title {
+            font-size: clamp(2.3rem, 4.5vw, 3.6rem);
+            font-weight: 900;
+            color: var(--tw-dark-blue);
+            line-height: 1.12;
+            margin-bottom: 22px;
+        }
+        .dc-hero-title span {
+            color: var(--tw-light-blue);
+            position: relative;
+            display: inline-block;
+        }
+        .dc-hero-title span::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: rgba(0, 174, 239, 0.2);
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .dc-hero-lead {
+            font-size: 1.12rem;
+            color: var(--text-main);
+            margin-bottom: 32px;
+            max-width: 560px;
+        }
+
+        .dc-hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 38px;
+        }
+
+        .dc-cta-btn {
+            background: linear-gradient(135deg, var(--secondary-orange), #ea580c);
+            color: var(--white);
+            padding: 17px 34px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 12px 25px -5px rgba(249, 115, 22, 0.45);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .dc-cta-btn:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 20px 30px -5px rgba(249, 115, 22, 0.6);
+        }
+
+        .dc-secondary-btn {
+            background: var(--white);
+            color: var(--tw-dark-blue);
+            padding: 16px 28px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: 2px solid #cbd5e1;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        .dc-secondary-btn:hover {
+            border-color: var(--tw-light-blue);
+            color: var(--tw-light-blue);
+            transform: translateY(-3px);
+        }
+
+        .dc-mini-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 25px;
+        }
+        .dc-mf-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--tw-dark-blue);
+        }
+        .dc-mf-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--bg-alt);
+            color: var(--tw-light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Hero Right Dual Image Collage */
+        .dc-collage-box {
+            position: relative;
+            height: 490px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dc-img-main {
+            width: 82%;
+            height: 420px;
+            border-radius: 26px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 59, 92, 0.28);
+            border: 8px solid var(--white);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s ease;
+        }
+        .dc-img-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        .dc-collage-box:hover .dc-img-main img {
+            transform: scale(1.08);
+        }
+
+        .dc-img-sub {
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 52%;
+            height: 210px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 6px solid var(--white);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+            animation: dcFloat 5s ease-in-out infinite;
+        }
+        .dc-img-sub img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dc-float-card {
+            position: absolute;
+            top: 15px;
+            right: 0;
+            background: rgba(0, 59, 92, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            padding: 18px 22px;
+            border-radius: 18px;
+            z-index: 4;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-left: 5px solid var(--tw-light-blue);
+            animation: dcFloat 6s ease-in-out 1.5s infinite;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .dc-float-card strong {
+            display: block;
+            font-size: 1.35rem;
+            color: var(--tw-light-blue);
+            line-height: 1;
+        }
+        .dc-float-card span {
+            font-size: 0.8rem;
+            color: #e2e8f0;
+        }
+
+        /* --- 2. Floating Stats Ribbon --- */
+        .dc-stats-ribbon {
+            margin-top: -55px;
+            position: relative;
+            z-index: 10;
+        }
+        .dc-stats-grid {
+            background: var(--tw-dark-blue);
+            border-radius: 22px;
+            padding: 35px 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 25px;
+            box-shadow: 0 20px 40px rgba(0, 59, 92, 0.25);
+            border-bottom: 5px solid var(--tw-light-blue);
+        }
+        .dc-stat-box {
+            text-align: center;
+            color: var(--white);
+            padding: 10px;
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+            transition: transform 0.3s ease;
+        }
+        .dc-stat-box:last-child { border-right: none; }
+        .dc-stat-box:hover { transform: translateY(-5px); }
+        .dc-stat-num {
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: var(--tw-light-blue);
+            line-height: 1.1;
+            margin-bottom: 5px;
+        }
+        .dc-stat-label {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 768px) {
+            .dc-stat-box { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+            .dc-stat-box:last-child { border-bottom: none; padding-bottom: 0; }
+        }
+
+        /* --- 3. Interactive Photo Grid: Drains We Clear --- */
+        .dc-section {
+            padding: 90px 0;
+        }
+        .dc-sec-head {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 60px auto;
+        }
+        .dc-eyebrow {
+            color: var(--secondary-orange);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .dc-sec-title {
+            font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+            color: var(--tw-dark-blue);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+        .dc-sec-sub {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+        }
+
+        .dc-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .dc-photo-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 59, 92, 0.07);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+        .dc-photo-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 45px rgba(0, 174, 239, 0.18);
+            border-color: var(--tw-light-blue);
+        }
+
+        .dc-card-img-wrap {
+            position: relative;
+            height: 230px;
+            overflow: hidden;
+        }
+        .dc-card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .dc-photo-card:hover .dc-card-img-wrap img {
+            transform: scale(1.12) rotate(1deg);
+        }
+        .dc-card-overlay-tag {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 59, 92, 0.88);
+            backdrop-filter: blur(6px);
+            color: var(--white);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .dc-card-floating-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: var(--tw-light-blue);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -32px;
+            margin-left: 26px;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 8px 20px rgba(0, 174, 239, 0.4);
+            border: 4px solid var(--white);
+            transition: transform 0.4s ease, background 0.4s ease;
+        }
+        .dc-photo-card:hover .dc-card-floating-icon {
+            background: var(--secondary-orange);
+            transform: rotateY(180deg) scale(1.1);
+        }
+
+        .dc-card-body {
+            padding: 20px 26px 28px 26px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .dc-card-body h3 {
+            font-size: 1.35rem;
+            color: var(--tw-dark-blue);
+            margin-bottom: 10px;
+            font-weight: 800;
+            transition: color 0.3s ease;
+        }
+        .dc-photo-card:hover .dc-card-body h3 {
+            color: var(--primary-color);
+        }
+        .dc-card-body p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+        .dc-card-bullets {
+            list-style: none;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 14px;
+        }
+        .dc-card-bullets li {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .dc-card-bullets li span {
+            color: var(--tw-light-blue);
+            font-weight: 900;
+        }
+
+        /* --- 4. Interactive Technology Tabs Section --- */
+        .dc-tech-sec {
+            background: linear-gradient(135deg, #00253a 0%, #0f172a 100%);
+            color: var(--white);
+            padding: 95px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dc-tabs-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 45px;
+        }
+        .dc-tab-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #cbd5e1;
+            padding: 16px 28px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .dc-tab-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .dc-tab-btn.active {
+            background: var(--tw-light-blue);
+            color: var(--white);
+            border-color: var(--tw-light-blue);
+            box-shadow: 0 10px 25px rgba(0, 174, 239, 0.4);
+        }
+
+        .dc-tab-panel {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 40px;
+            animation: dcSlideFade 0.5s ease forwards;
+        }
+        .dc-tab-panel.active {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        @media (min-width: 992px) {
+            .dc-tab-panel.active { grid-template-columns: 1fr 1fr; }
+        }
+
+        .dc-tech-img {
+            border-radius: 18px;
+            overflow: hidden;
+            height: 360px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 4px solid rgba(255,255,255,0.15);
+        }
+        .dc-tech-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .dc-tab-panel:hover .dc-tech-img img {
+            transform: scale(1.06);
+        }
+
+        .dc-tech-content h3 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+        .dc-tech-content h3 span {
+            color: var(--tw-light-blue);
+        }
+        .dc-tech-content p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+        }
+        .dc-tech-perks {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .dc-perk-box {
+            background: rgba(255,255,255,0.06);
+            padding: 14px 16px;
+            border-radius: 12px;
+            border-left: 3px solid var(--secondary-orange);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #f8fafc;
+        }
+
+        /* --- 5. DIY Chemical Cleaners vs Pro Comparison --- */
+        .dc-compare-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 35px;
+            align-items: stretch;
+        }
+        @media (min-width: 992px) {
+            .dc-compare-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .dc-comp-card {
+            border-radius: 22px;
+            padding: 40px 32px;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .dc-comp-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .dc-comp-bad {
+            background: #fff1f2;
+            border: 2px solid #fecdd3;
+        }
+        .dc-comp-good {
+            background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid var(--tw-light-blue);
+            box-shadow: 0 20px 40px rgba(0, 174, 239, 0.12);
+        }
+
+        .dc-comp-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+        .dc-comp-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--white);
+        }
+        .dc-comp-bad .dc-comp-icon { background: #e11d48; }
+        .dc-comp-good .dc-comp-icon { background: var(--tw-dark-blue); }
+
+        .dc-comp-header h3 {
+            font-size: 1.45rem;
+            color: var(--tw-dark-blue);
+        }
+        .dc-comp-list {
+            list-style: none;
+        }
+        .dc-comp-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 0.98rem;
+            color: var(--text-main);
+        }
+
+        /* --- 6. FAQ & Emergency Banner (White Bottom for Footer Curve) --- */
+        .dc-faq-section {
+            background-color: var(--white);
+            padding: 85px 0 90px 0;
+        }
+        .dc-faq-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 45px;
+            align-items: start;
+        }
+        @media (min-width: 992px) {
+            .dc-faq-grid { grid-template-columns: 0.9fr 1.1fr; }
+        }
+
+        .dc-side-Visual {
+            background: var(--tw-dark-blue);
+            border-radius: 24px;
+            padding: 35px;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 59, 92, 0.2);
+        }
+        .dc-side-Visual img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            border: 3px solid var(--tw-light-blue);
+        }
+        .dc-side-Visual h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+        }
+        .dc-side-Visual p {
+            color: #cbd5e1;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        .dc-faq-item {
+            background: var(--light-bg);
+            border: 1px solid #bae6fd;
+            border-radius: 14px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .dc-faq-item:hover {
+            border-color: var(--tw-light-blue);
+        }
+        .dc-faq-q {
+            width: 100%;
+            padding: 20px 24px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--tw-dark-blue);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .dc-faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+            padding: 0 24px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+        .dc-faq-item.active {
+            background: var(--white);
+            box-shadow: 0 10px 25px rgba(0, 59, 92, 0.08);
+        }
+        .dc-faq-item.active .dc-faq-a {
+            max-height: 240px;
+            padding-bottom: 20px;
+        }
+        .dc-faq-arrow {
+            transition: transform 0.3s ease;
+            color: var(--tw-light-blue);
+            flex-shrink: 0;
+        }
+        .dc-faq-item.active .dc-faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* ===== FOOTER (From he fe.html - Unchanged) ===== */
+        :root {
+            --color-deepblue: #0B1320;
+            --color-cyan: #22d3ee;
+            --color-cyan-hover: #67e8f9;
+            --color-text-light: #ffffff;
+            --color-text-gray: #9ca3af;
+            --color-border: #1f2937;
+        }
+
+        .fe-site-footer {
+            background-color: var(--color-deepblue);
+            color: var(--color-text-gray);
+            padding: 4rem 0 2rem 0;
+            border-top: 4px solid var(--color-cyan);
+        }
+
+        .fe-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        .fe-footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .fe-footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .fe-footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        .fe-brand-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.25rem;
+            text-decoration: none;
+        }
+
+        .fe-footer-logo {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .fe-brand-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            letter-spacing: -0.025em;
+        }
+
+        .fe-text-cyan {
+            color: var(--color-cyan);
+        }
+
+        .fe-brand-desc {
+            font-size: 0.875rem;
+            line-height: 1.625;
+            padding-right: 1rem;
+        }
+
+        .fe-footer-heading {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .fe-footer-list {
+            list-style: none;
+        }
+
+        .fe-footer-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .fe-footer-list a {
+            display: flex;
+            align-items: center;
+            color: var(--color-text-gray);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .fe-footer-list a:hover {
+            color: var(--color-cyan);
+        }
+
+        .fe-link-icon {
+            width: 1rem;
+            height: 1rem;
+            color: var(--color-cyan);
+            margin-right: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .fe-footer-list a:hover .fe-link-icon {
+            transform: translateX(4px);
+        }
+
+        .fe-contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .fe-contact-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: var(--color-cyan);
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .fe-contact-text {
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .fe-contact-text.fe-large {
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+
+        .fe-contact-text:hover {
+            color: var(--color-cyan);
+        }
+
+        .fe-footer-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.875rem;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .fe-footer-bottom {
+                flex-direction: row;
+            }
+        }
+
+        .fe-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .fe-bottom-links a {
+            color: var(--color-text-gray);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .fe-bottom-links a:hover {
+            color: var(--color-cyan);
+        }
+
+        .footer-containerfoofon { background: linear-gradient(145deg, #020617, #0f172a); color: var(--white); position: relative; padding-top: clamp(80px, 12vw, 120px); padding-bottom: 30px; display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .curve-dividerfoofon { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; transform: translateY(-1px); }
+        .curve-dividerfoofon svg { display: block; width: 100%; height: clamp(40px, 6vw, 80px); }
+        .curve-dividerfoofon .shape-fillfoofon { fill: var(--white); }
+    </style>
+</head>
+<body>
+
+ <!-- NAVBAR -->
+    <nav class="ser-navbar">
+        <div class="ser-nav-container">
+            
+            <a href="index.html" class="ser-logo-section">
+   <div class="ser-image-container">
+                   <img src="image/logo.png" alt="Logo" style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%;">
+                </div>
+             
+                <div class="ser-logo-text">
+                    <span class="ser-brand-name">Trusty<span>Plumb</span></span>
+                  
+                </div>
+            </a>
+
+            <ul class="ser-nav-menu" id="navMenu">
+                <li><a href="#" class="ser-nav-link">Home</a></li>
+                
+                <li class="ser-dropdown-container" id="servicesDropdown">
+                    <button class="ser-dropdown-trigger">
+                        Services <span class="ser-n-arrow">▼</span>
+                    </button>
+                    <ul class="ser-dropdown">
+                        <li><a href="Leak Repair.html">Leak Repair</a></li>
+                       
+                        <li><a href="Drain Cleaning.html">Drain Cleaning</a></li>
+                        <li><a href="Water Heaters.html">Water Heaters</a></li>
+                        
+                        <li><a href="Pipe Installation.html">Pipe Installation</a></li>
+                        <li><a href="Commercial Plumbing.html">Commercial Plumbing</a></li>
+                           <li><a href="Emergency Plumbing.html">24/7 Emergency</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="Reviews.html" class="ser-nav-link">Trusted Reviews</a></li>
+                <li><a href="Team.html" class="ser-nav-link">Meet Our Team</a></li>
+                <li><a href="tel:+1 877 346 0820" class="ser-call-btn">Call Now</a></li>
+            </ul>
+
+            <button class="ser-menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- =========================================
+         DRAIN CLEANING MAIN CONTENT (NEW DESIGN)
+         ========================================= -->
+
+    <!-- 1. Split Collage Hero -->
+    <section class="dc-hero">
+        <div class="dc-water-circle dc-wc-1"></div>
+        <div class="dc-water-circle dc-wc-2"></div>
+
+        <div class="dc-container">
+            <div class="dc-hero-wrapper">
+                <!-- Left Text -->
+                <div>
+                    <div class="dc-pill-tag">
+                        <span class="dc-pill-dot"></span>
+                        Fast Hydro-Jetting & Root Clearing
+                    </div>
+                    <h1 class="dc-hero-title">
+                        Stubborn Clogs Cleared. <span>Flow Restored Fast!</span>
+                    </h1>
+                    <p class="dc-hero-lead">
+                        Slow sinks, backed-up showers, or overflowing main sewer lines? We use high-pressure water jetting and HD fiber-optic cameras to blast away blockages permanently—without harsh pipe-corroding chemicals.
+                    </p>
+
+                    <div class="dc-hero-actions">
+                        <a href="tel:+13214858055" class="dc-cta-btn">
+                            <i data-lucide="phone-call"></i> Unclog My Drain Now
+                        </a>
+                        <a href="#drain-types" class="dc-secondary-btn">
+                            Explore Services <i data-lucide="arrow-down-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="dc-mini-features">
+                        <div class="dc-mf-item">
+                            <div class="dc-mf-icon"><i data-lucide="zap" style="width:18px;"></i></div>
+                            <span>Same-Day Unclogging</span>
+                        </div>
+                        <div class="dc-mf-item">
+                            <div class="dc-mf-icon"><i data-lucide="video" style="width:18px;"></i></div>
+                            <span>Free Camera Check</span>
+                        </div>
+                        <div class="dc-mf-item">
+                            <div class="dc-mf-icon"><i data-lucide="shield" style="width:18px;"></i></div>
+                            <span>Zero Pipe Damage</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Animated Collage -->
+                <div class="dc-collage-box">
+                    <div class="dc-img-main">
+                        <img src="https://i.pinimg.com/736x/28/42/a3/2842a31ebe7dddcffa1a54a8420ec317.jpg" alt="Modern clean sink and drainage">
+                    </div>
+                    <div class="dc-img-sub">
+                        <img src="https://i.pinimg.com/736x/08/bb/6f/08bb6f8f3d738ddc680ede92fecfe06d.jpg" alt="Plumber clearing drain pipe">
+                    </div>
+                    <div class="dc-float-card">
+                        <i data-lucide="gauge" style="width: 34px; height: 34px; color: var(--secondary-orange);"></i>
+                        <div>
+                            <strong>4,000 PSI</strong>
+                            <span>Hydro-Jet Cleaning Power</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Floating Stats Ribbon -->
+    <div class="dc-container dc-stats-ribbon">
+        <div class="dc-stats-grid">
+            <div class="dc-stat-box">
+                <div class="dc-stat-num">15,000+</div>
+                <div class="dc-stat-label">Drains Unclogged</div>
+            </div>
+            <div class="dc-stat-box">
+                <div class="dc-stat-num">45 Mins</div>
+                <div class="dc-stat-label">Avg. Arrival Time</div>
+            </div>
+            <div class="dc-stat-box">
+                <div class="dc-stat-num">100%</div>
+                <div class="dc-stat-label">Eco-Safe Clearing</div>
+            </div>
+            <div class="dc-stat-box">
+                <div class="dc-stat-num">24/7</div>
+                <div class="dc-stat-label">Sewer Backup Rescue</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Interactive Photo Cards: Every Drain We Clear -->
+    <section id="drain-types" class="dc-section">
+        <div class="dc-container">
+            <div class="dc-sec-head">
+                <span class="dc-eyebrow">Targeted Drain Solutions</span>
+                <h2 class="dc-sec-title">We Clear Every Drain Inside & Outside Your Property</h2>
+                <p class="dc-sec-sub">Different drains collect different types of buildup. Hover over each service to see how we eliminate specific blockages at the root.</p>
+            </div>
+
+            <div class="dc-photo-grid">
+                <!-- Card 1 -->
+                <div class="dc-photo-card">
+                    <div class="dc-card-img-wrap">
+                        <img src="https://i.pinimg.com/736x/71/38/56/713856eb712c0eeacaac5cb6e2c93004.jpg" alt="Kitchen Sink Drain Cleaning">
+                        <span class="dc-card-overlay-tag">Grease & Food</span>
+                    </div>
+                    <div class="dc-card-floating-icon">
+                        <i data-lucide="utensils"></i>
+                    </div>
+                    <div class="dc-card-body">
+                        <div>
+                            <h3>Kitchen Sinks & Disposals</h3>
+                            <p>Cooking oils, fats, soap residue, and food scraps solidify inside kitchen P-traps and branch lines over time.</p>
+                        </div>
+                        <ul class="dc-card-bullets">
+                            <li><span>✓</span> Emulsifies hardened grease buildup</li>
+                            <li><span>✓</span> Unjams garbage disposal blades</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="dc-photo-card">
+                    <div class="dc-card-img-wrap">
+                        <img src="https://i.pinimg.com/736x/0f/46/df/0f46dff304d085551a92edddab27b98b.jpg" alt="Bathroom Shower and Tub Drain">
+                        <span class="dc-card-overlay-tag">Hair & Soap Scum</span>
+                    </div>
+                    <div class="dc-card-floating-icon">
+                        <i data-lucide="bath"></i>
+                    </div>
+                    <div class="dc-card-body">
+                        <div>
+                            <h3>Showers, Tubs & Bathroom Sinks</h3>
+                            <p>Standing ankle-deep in shower water? Hair tangles and toothpaste sediment create dense plugs deep in the drain.</p>
+                        </div>
+                        <ul class="dc-card-bullets">
+                            <li><span>✓</span> Deep extraction of hairballs</li>
+                            <li><span>✓</span> Restores instant vortex drainage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="dc-photo-card">
+                    <div class="dc-card-img-wrap">
+                        <img src="https://i.pinimg.com/736x/b4/37/13/b43713682c0dc25915bc55564a535b5d.jpg" alt="Clogged Toilet Unclogging">
+                        <span class="dc-card-overlay-tag">Emergency Relief</span>
+                    </div>
+                    <div class="dc-card-floating-icon">
+                        <i data-lucide="droplets"></i>
+                    </div>
+                    <div class="dc-card-body">
+                        <div>
+                            <h3>Clogged & Backed-Up Toilets</h3>
+                            <p>When a plunger isn't enough, our specialized closet augers safely navigate porcelain traps without scratching your bowl.</p>
+                        </div>
+                        <ul class="dc-card-bullets">
+                            <li><span>✓</span> Removes flushable wipes & toys</li>
+                            <li><span>✓</span> Fixes weak or gurgling flushes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="dc-photo-card">
+                    <div class="dc-card-img-wrap">
+                        <img src="https://i.pinimg.com/736x/bb/4d/9b/bb4d9bdef193dbb51220227c240e26b8.jpg" alt="Main Sewer Line Clearing">
+                        <span class="dc-card-overlay-tag">Tree Roots & Scale</span>
+                    </div>
+                    <div class="dc-card-floating-icon">
+                        <i data-lucide="git-commit"></i>
+                    </div>
+                    <div class="dc-card-body">
+                        <div>
+                            <h3>Main Sewer Line Clearing</h3>
+                            <p>Multiple fixtures backing up at once points to a main sewer blockage caused by invasive tree roots or pipe bellies.</p>
+                        </div>
+                        <ul class="dc-card-bullets">
+                            <li><span>✓</span> Heavy-duty rooter cutting heads</li>
+                            <li><span>✓</span> Full-diameter pipe descaling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="dc-photo-card">
+                    <div class="dc-card-img-wrap">
+                        <img src="https://i.pinimg.com/1200x/ca/d5/3f/cad53f998f55b6c9ebb087f298a12d90.jpg" alt="Laundry and Basement Floor Drains">
+                        <span class="dc-card-overlay-tag">Flood Prevention</span>
+                    </div>
+                    <div class="dc-card-floating-icon">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <div class="dc-card-body">
+                        <div>
+                            <h3>Floor & Laundry Room Drains</h3>
+                            <p>Basement, garage, and utility room floor drains trap lint, mud, and detergent sludge that can flood your lower level.</p>
+                        </div>
+                        <ul class="dc-card-bullets">
+                            <li><span>✓</span> Lint & sediment trap flushing</li>
+                            <li><span>✓</span> Backwater valve inspection</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="dc-photo-card">
+                    <div class="dc-card-img-wrap">
+                        <img src="https://i.pinimg.com/1200x/e7/c2/84/e7c284f0d0ec520da8799ef7c1602e39.jpg" alt="Outdoor Storm and Patio Drains">
+                        <span class="dc-card-overlay-tag">Exterior Drainage</span>
+                    </div>
+                    <div class="dc-card-floating-icon">
+                        <i data-lucide="cloud-rain"></i>
+                    </div>
+                    <div class="dc-card-body">
+                        <div>
+                            <h3>Storm, Downspout & Yard Drains</h3>
+                            <p>Keep rainwater away from your foundation by clearing leaves, mud, and twigs out of exterior French and patio drains.</p>
+                        </div>
+                        <ul class="dc-card-bullets">
+                            <li><span>✓</span> High-volume debris jetting</li>
+                            <li><span>✓</span> Prevents yard & driveway pooling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Interactive Technology Switcher (Tabs) -->
+    <section class="dc-tech-sec">
+        <div class="dc-container">
+            <div class="dc-sec-head">
+                <span class="dc-eyebrow" style="color: var(--tw-light-blue);">Our Drain Arsenal</span>
+                <h2 class="dc-sec-title" style="color: var(--white);">Industrial-Grade Equipment For a Spotless Pipe Interior</h2>
+                <p class="dc-sec-sub" style="color: #94a3b8;">Click through our three core technologies below to see how we diagnose and obliterate tough blockages.</p>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="dc-tabs-nav">
+                <button class="dc-tab-btn active" data-tab="tab-jetting">
+                    <i data-lucide="waves"></i> 1. High-Pressure Hydro-Jetting
+                </button>
+                <button class="dc-tab-btn" data-tab="tab-camera">
+                    <i data-lucide="camera"></i> 2. HD Sewer Camera Inspection
+                </button>
+                <button class="dc-tab-btn" data-tab="tab-snaking">
+                    <i data-lucide="settings"></i> 3. Motorized Rotary Rooter
+                </button>
+            </div>
+
+            <!-- Panel 1: Hydro-Jetting -->
+            <div class="dc-tab-panel active" id="tab-jetting">
+                <div class="dc-tech-img">
+                    <img src="https://i.pinimg.com/1200x/b8/b0/bf/b8b0bfb861191cdf5e96011a982bfa44.jpg" alt="High Pressure Hydro Jetting">
+                </div>
+                <div class="dc-tech-content">
+                    <h3><span>Hydro-Jetting:</span> Like Power-Washing the Inside of Your Pipes</h3>
+                    <p>Traditional snakes only poke a hole through sludge, leaving residue behind to clog again next month. Our 4,000 PSI Hydro-Jetter blasts 360-degree streams of water that scrub pipe walls back to "like-new" condition.</p>
+                    <div class="dc-tech-perks">
+                        <div class="dc-perk-box">✓ Cuts through invasive tree roots</div>
+                        <div class="dc-perk-box">✓ Melts years of hardened kitchen grease</div>
+                        <div class="dc-perk-box">✓ 100% chemical-free pure water</div>
+                        <div class="dc-perk-box">✓ Prevents recurring backups for years</div>
+                    </div>
+                    <a href="tel:+13214858055" class="dc-cta-btn">Ask About Hydro-Jetting</a>
+                </div>
+            </div>
+
+            <!-- Panel 2: Camera Inspection -->
+            <div class="dc-tab-panel" id="tab-camera">
+                <div class="dc-tech-img">
+                    <img src="https://i.pinimg.com/1200x/c7/d8/e1/c7d8e1129f50267c35964a0dee951e8e.jpg" alt="Fiber Optic Sewer Camera">
+                </div>
+                <div class="dc-tech-content">
+                    <h3><span>HD Video Inspection:</span> See What's Blocking Your Line in Real Time</h3>
+                    <p>No more guessing! We feed a waterproof, LED-lit fiber-optic camera deep into your drain lines. You can watch live on our monitor as we pinpoint the exact depth and nature of the problem.</p>
+                    <div class="dc-tech-perks">
+                        <div class="dc-perk-box">✓ Spots cracked or collapsed pipes</div>
+                        <div class="dc-perk-box">✓ Locates lost jewelry or objects</div>
+                        <div class="dc-perk-box">✓ Built-in sonar transmitter locator</div>
+                        <div class="dc-perk-box">✓ Verifies line is 100% clean after work</div>
+                    </div>
+                    <a href="tel:+13214858055" class="dc-cta-btn">Book a Camera Inspection</a>
+                </div>
+            </div>
+
+            <!-- Panel 3: Motorized Rooter -->
+            <div class="dc-tab-panel" id="tab-snaking">
+                <div class="dc-tech-img">
+                    <img src="https://i.pinimg.com/1200x/26/8c/91/268c91bb0d32dfd3cbc6ca2b35522c53.jpg" alt="Motorized Drain Auger">
+                </div>
+                <div class="dc-tech-content">
+                    <h3><span>Motorized Rooter Cabling:</span> Fast Relief for Everyday Clogs</h3>
+                    <p>Equipped with interchangeable cutting blades and retrieval hooks, our commercial-grade steel cables reach up to 150 feet down your plumbing line to snag and pull out solid obstructions.</p>
+                    <div class="dc-tech-perks">
+                        <div class="dc-perk-box">✓ Safe for older cast-iron & PVC pipes</div>
+                        <div class="dc-perk-box">✓ Clears hair, wipes & hygiene products</div>
+                        <div class="dc-perk-box">✓ Fast 30-minute turnaround</div>
+                        <div class="dc-perk-box">✓ Budget-friendly everyday solution</div>
+                    </div>
+                    <a href="tel:+13214858055" class="dc-cta-btn">Schedule Rooter Service</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Store-Bought Chemicals vs Professional Cleaning -->
+    <section class="dc-section" style="background-color: var(--bg-alt);">
+        <div class="dc-container">
+            <div class="dc-sec-head">
+                <span class="dc-eyebrow">Protect Your Plumbing</span>
+                <h2 class="dc-sec-title">Why Store-Bought Liquid Cleaners Do More Harm Than Good</h2>
+                <p class="dc-sec-sub">Before pouring a bottle of harsh acid down your sink, see how it compares to a professional TrustyPlumb drain cleaning.</p>
+            </div>
+
+            <div class="dc-compare-grid">
+                <!-- Bad Column -->
+                <div class="dc-comp-card dc-comp-bad">
+                    <div class="dc-comp-header">
+                        <div class="dc-comp-icon"><i data-lucide="x-octagon" style="width: 28px; height: 28px;"></i></div>
+                        <div>
+                            <span style="font-size:0.8rem; font-weight:800; color:#e11d48; text-transform:uppercase;">The Risky Way</span>
+                            <h3>Store-Bought Chemical Cleaners</h3>
+                        </div>
+                    </div>
+                    <ul class="dc-comp-list">
+                        <li>
+                            <i data-lucide="x-circle" style="color:#e11d48; flex-shrink:0; margin-top:3px;"></i>
+                            <span><strong>Melts & Warps PVC Pipes:</strong> Caustic chemical reactions generate intense heat that softens plastic pipes and ruins glue joints.</span>
+                        </li>
+                        <li>
+                            <i data-lucide="x-circle" style="color:#e11d48; flex-shrink:0; margin-top:3px;"></i>
+                            <span><strong>Eats Away Old Metal:</strong> Sulfuric acid corrodes cast-iron and copper traps, leading to expensive hidden leaks under your cabinet.</span>
+                        </li>
+                        <li>
+                            <i data-lucide="x-circle" style="color:#e11d48; flex-shrink:0; margin-top:3px;"></i>
+                            <span><strong>Temporary Tunnel Effect:</strong> Liquids only burn a tiny hole through the clog—leaving 85% of the sludge behind to block up again days later.</span>
+                        </li>
+                        <li>
+                            <i data-lucide="x-circle" style="color:#e11d48; flex-shrink:0; margin-top:3px;"></i>
+                            <span><strong>Toxic Fumes & Splash Hazard:</strong> Dangerous for children, pets, and septic tank bacteria.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Good Column -->
+                <div class="dc-comp-card dc-comp-good">
+                    <div class="dc-comp-header">
+                        <div class="dc-comp-icon"><i data-lucide="check-circle-2" style="width: 28px; height: 28px;"></i></div>
+                        <div>
+                            <span style="font-size:0.8rem; font-weight:800; color:var(--primary-color); text-transform:uppercase;">The TrustyPlumb Way</span>
+                            <h3>Professional Mechanical & Hydro Clearing</h3>
+                        </div>
+                    </div>
+                    <ul class="dc-comp-list">
+                        <li>
+                            <i data-lucide="check-circle" style="color:var(--primary-color); flex-shrink:0; margin-top:3px;"></i>
+                            <span><strong>100% Pipe-Safe:</strong> Uses controlled mechanical cables and pure pressurized water tailored to your pipe's exact age and material.</span>
+                        </li>
+                        <li>
+                            <i data-lucide="check-circle" style="color:var(--primary-color); flex-shrink:0; margin-top:3px;"></i>
+                            <span><strong>Full-Diameter Cleaning:</strong> Restores 100% of the pipe's original flow capacity from wall to wall.</span>
+                        </li>
+                        <li>
+                            <i data-lucide="check-circle" style="color:var(--primary-color); flex-shrink:0; margin-top:3px;"></i>
+                            <span><strong>Reaches Deep Sewer Lines:</strong> Clears blockages 100+ feet underground where liquid cleaners get diluted and useless.</span>
+                        </li>
+                        <li>
+                            <i data-lucide="check-circle" style="color:var(--primary-color); flex-shrink:0; margin-top:3px;"></i>
+                            <span><strong>Backed by Our Flow Guarantee:</strong> Peace of mind knowing the root cause was verified on camera.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Split Visual & FAQ Section (White background to match Footer wave) -->
+    <section class="dc-faq-section">
+        <div class="dc-container">
+            <div class="dc-faq-grid">
+                <!-- Left Promo Card with Image -->
+                <div class="dc-side-Visual">
+                    <img src="https://i.pinimg.com/1200x/8e/e0/86/8ee086789004ced8bda56a8b12316ecb.jpg" alt="Emergency Drain Technician">
+                    <span style="color:var(--tw-light-blue); font-weight:800; font-size:0.85rem; text-transform:uppercase; letter-spacing:1px;">24/7 Rapid Dispatch</span>
+                    <h3>Got Water Backing Up Right Now?</h3>
+                    <p>Don't wait for a clogged sewer line to overflow onto your floors. Our fully-stocked drain trucks are in your neighborhood and ready to roll.</p>
+                    <a href="tel:+13214858055" class="dc-cta-btn" style="width:100%; justify-content:center;">
+                        <i data-lucide="phone-call"></i> Call +1 (321) 485-8055
+                    </a>
+                </div>
+
+                <!-- Right Accordion FAQs -->
+                <div>
+                    <span class="dc-eyebrow">Common Questions</span>
+                    <h2 class="dc-sec-title" style="margin-bottom: 28px;">Drain Cleaning FAQs</h2>
+
+                    <div class="dc-faq-item active">
+                        <button class="dc-faq-q">
+                            How do I know if my main sewer line is clogged vs. just one drain?
+                            <i data-lucide="chevron-down" class="dc-faq-arrow"></i>
+                        </button>
+                        <div class="dc-faq-a">
+                            If only one sink or shower is draining slowly, the clog is isolated in that fixture's branch pipe. However, if flushing a toilet causes water to gurgle or back up into your bathtub, or multiple downstairs fixtures clog at once, your main sewer line is blocked.
+                        </div>
+                    </div>
+
+                    <div class="dc-faq-item">
+                        <button class="dc-faq-q">
+                            Is Hydro-Jetting safe for older homes with cast-iron or clay pipes?
+                            <i data-lucide="chevron-down" class="dc-faq-arrow"></i>
+                        </button>
+                        <div class="dc-faq-a">
+                            We always perform a camera inspection first! For fragile or aging pipes, our technicians dial down the PSI pressure or use specialized descaling chains and rotary augers so your pipes are cleaned safely without structural stress.
+                        </div>
+                    </div>
+
+                    <div class="dc-faq-item">
+                        <button class="dc-faq-q">
+                            Why does my bathroom or kitchen sink smell like rotten eggs?
+                            <i data-lucide="chevron-down" class="dc-faq-arrow"></i>
+                        </button>
+                        <div class="dc-faq-a">
+                            That sulfur smell is usually caused by decaying food, bacteria, and biofilm coating the walls of the drain pipe or overflow tube—or a dry P-trap allowing sewer gas to enter. A thorough enzymatic and mechanical drain cleaning eliminates the odor immediately.
+                        </div>
+                    </div>
+
+                    <div class="dc-faq-item">
+                        <button class="dc-faq-q">
+                            How often should I have my drains professionally cleaned?
+                            <i data-lucide="chevron-down" class="dc-faq-arrow"></i>
+                        </button>
+                        <div class="dc-faq-a">
+                            For most households, a preventative main line inspection and kitchen drain cleaning every 18 to 24 months keeps grease and tree roots from ever causing a surprise emergency backup.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section (Unchanged) -->
+    <footer class="footer-containerfoofon">
+        <div class="fe-container">
+              <div class="curve-dividerfoofon">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path class="shape-fillfoofon" d="M0,32L60,42.7C120,53,240,75,360,80C480,85,600,75,720,58.7C840,43,960,21,1080,16C1200,11,1320,21,1380,26.7L1440,32V0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+            </svg>
+        </div>
+            <!-- Main Grid for 4 Columns -->
+        <div class="fe-footer-grid">
+            
+           <!-- Column 1: Brand & Description -->
+            <div class="fe-footer-col">
+              
+<a href="index.html" class="fe-brand-header">
+
+                     <div class="ser-image-container">
+                   <img src="image/logo.png" alt="Logo" style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%;">
+                </div>
+                    <h2 class="fe-brand-title">Trusty<span class="fe-text-cyan">Plumb</span></h2>
+                </a>
+                <p class="fe-brand-desc">
+                    Your trusted partner for all residential and commercial plumbing needs. We fix it right, day or night.
+                </p>
+            </div>
+
+       
+               <!-- Column 2: Quick Links -->
+                <div class="fe-footer-col">
+                    <h3 class="fe-footer-heading">Quick Links</h3>
+                    <ul class="fe-footer-list">
+                        <li>
+                            <a href="#">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Reviews.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                REVIEWS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Team.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                MEET OUR TEAM
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Privacy Policy.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href=" Terms of service.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Terms of service
+                            </a>
+                        </li>
+	 <li>
+                            <a href=" tel:+13214858055" >
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                 Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Our Services -->
+                <div class="fe-footer-col">
+                    <h3 class="fe-footer-heading">Our Services</h3>
+                    <ul class="fe-footer-list">
+                        <li>
+                            <a href="Leak Repair.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Leak Repair
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Drain Cleaning.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Drain Cleaning
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Water Heaters.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Water Heaters
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Pipe Installation.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Pipe Installation
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Commercial Plumbing.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                Commercial Plumbing
+                            </a>
+                        </li>
+   <li>
+                            <a href="Emergency Plumbing.html">
+                                <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                24/7 Emergency
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact Info -->
+                <div class="fe-footer-col">
+                    <h3 class="fe-footer-heading">Contact Info</h3>
+                    
+                    <!-- Phone -->
+                    <div class="fe-contact-item">
+                        <svg class="fe-contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <a href="tel:8005550199" class="fe-contact-text fe-large">
+                            (800) 555-0199
+                        </a>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="fe-contact-item">
+                        <svg class="fe-contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <a href="mailto:service@trustyplumb.com" class="fe-contact-text">
+                            service@trustyplumb.com
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+
+           <!-- Bottom Bar -->
+            <div class="fe-footer-bottom">
+                <div class="fe-copyright">
+                    &copy; 2026 TrustyPlumb. All rights reserved.
+                </div>
+                <div class="fe-bottom-links">
+                    <a href="Privacy Policy.html">Privacy Policy</a>
+                    <a href=" Terms of service.html">Terms of Service</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons Script -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Combined Scripts -->
+    <script>
+        // ================= Initialize Icons =================
+        lucide.createIcons();
+
+        // ================= Navbar Scripts =================
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const servicesDropdown = document.getElementById('servicesDropdown');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('ser-active');
+            const spans = menuToggle.getElementsByTagName('span');
+            if(navMenu.classList.contains('ser-active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        servicesDropdown.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                const trigger = e.target.closest('.ser-dropdown-trigger');
+                if (trigger) {
+                    e.preventDefault();
+                    servicesDropdown.classList.toggle('ser-mobile-open');
+                }
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                navMenu.classList.remove('ser-active');
+                servicesDropdown.classList.remove('ser-mobile-open');
+            }
+        });
+
+        // ================= Technology Tabs Script =================
+        const tabBtns = document.querySelectorAll('.dc-tab-btn');
+        const tabPanels = document.querySelectorAll('.dc-tab-panel');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabPanels.forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                const target = document.getElementById(btn.getAttribute('data-tab'));
+                if (target) target.classList.add('active');
+            });
+        });
+
+        // ================= FAQ Accordion Script =================
+        const faqItems = document.querySelectorAll('.dc-faq-item');
+        faqItems.forEach(item => {
+            const btn = item.querySelector('.dc-faq-q');
+            btn.addEventListener('click', () => {
+                const isOpen = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isOpen) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
