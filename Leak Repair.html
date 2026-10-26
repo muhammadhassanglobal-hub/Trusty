@@ -40,7 +40,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body {
+        html, body {
             background-color: var(--light-bg);
             color: var(--text-main);
             line-height: 1.6;
@@ -80,6 +80,7 @@
             width: 55px; height: 55px; border-radius: 50%; border: 3px solid var(--tw-light-blue);
             display: flex; align-items: center; justify-content: center; background-color: var(--white);
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;
+            flex-shrink: 0;
         }
         .ser-image-container img { width: 70%; height: auto; object-fit: contain; }
         .ser-logo-text { display: flex; flex-direction: column; line-height: 1; }
@@ -252,10 +253,12 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             box-shadow: 0 6px 20px rgba(0, 174, 239, 0.4);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-transform: uppercase;
+            text-align: center;
         }
 
         .btn-orange-3d:hover {
@@ -295,6 +298,7 @@
             color: var(--tw-light-blue);
             width: 20px;
             height: 20px;
+            flex-shrink: 0;
         }
 
         .leak-hero-img-box {
@@ -346,6 +350,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
             transition: var(--transition);
         }
         .floating-stat-card:hover .stat-icon {
@@ -591,7 +596,11 @@
             margin-top: 3rem;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 992px) {
             .process-grid { grid-template-columns: repeat(4, 1fr); }
         }
 
@@ -824,6 +833,7 @@
             text-decoration: none;
             font-size: 0.875rem;
             transition: color 0.2s ease;
+            word-break: break-word;
         }
 
         .fe-contact-text.fe-large {
@@ -844,16 +854,20 @@
             border-top: 1px solid var(--color-border);
             font-size: 0.875rem;
             gap: 1rem;
+            text-align: center;
         }
 
         @media (min-width: 768px) {
             .fe-footer-bottom {
                 flex-direction: row;
+                text-align: left;
             }
         }
 
         .fe-bottom-links {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1.5rem;
         }
 
@@ -871,6 +885,173 @@
         .curve-dividerfoofon { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; transform: translateY(-1px); }
         .curve-dividerfoofon svg { display: block; width: 100%; height: clamp(40px, 6vw, 80px); }
         .curve-dividerfoofon .shape-fillfoofon { fill: var(--light-bg); }
+
+        /* =========================================
+           COMPREHENSIVE MOBILE RESPONSIVENESS
+           ========================================= */
+        @media (max-width: 991px) {
+            .leak-hero {
+                padding: 4rem 0 4.5rem 0;
+            }
+            .leak-hero-grid {
+                gap: 2.5rem;
+            }
+            .section-padding,
+            .solutions-section {
+                padding: 4rem 0;
+            }
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+            .solutions-split {
+                gap: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ser-navbar {
+                height: 80px;
+            }
+            .ser-nav-menu {
+                top: 80px;
+                max-height: calc(100vh - 80px);
+            }
+            .ser-nav-container {
+                padding: 0 16px;
+            }
+            .ser-brand-name {
+                font-size: 1.45rem;
+            }
+            .ser-image-container {
+                width: 46px;
+                height: 46px;
+            }
+
+            .page-container {
+                padding: 0 16px;
+            }
+
+            .service-badge {
+                font-size: 0.75rem;
+                padding: 6px 14px;
+            }
+            .leak-hero h1 {
+                font-size: 2rem;
+            }
+            .leak-hero p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-action-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn-orange-3d {
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 0.95rem;
+            }
+
+            .hero-features-mini {
+                flex-direction: column;
+                gap: 0.85rem;
+                margin-top: 1.75rem;
+                padding-top: 1.25rem;
+            }
+
+            .leak-hero-img {
+                height: 290px;
+                border-radius: 16px;
+            }
+            .floating-stat-card {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                margin-top: -28px;
+                margin-left: 12px;
+                margin-right: 12px;
+                padding: 14px 16px;
+                z-index: 5;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .sign-card {
+                padding: 1.75rem 1.5rem;
+            }
+            .sign-icon-wrapper {
+                width: 56px;
+                height: 56px;
+                margin-bottom: 1.25rem;
+            }
+
+            /* Remove staggered margins on mobile so images don't overlap */
+            .solutions-image-grid img {
+                height: 175px;
+            }
+            .solutions-image-grid img:nth-child(2),
+            .solutions-image-grid img:nth-child(3) {
+                margin-top: 0;
+            }
+
+            .solution-item {
+                padding: 1.1rem;
+            }
+            .solution-item:hover {
+                transform: translateY(-3px);
+            }
+
+            .process-grid {
+                margin-top: 2rem;
+                gap: 1.25rem;
+            }
+            .process-step {
+                padding: 1.75rem 1.25rem;
+            }
+
+            .cta-banner {
+                padding: 2.75rem 1.25rem;
+                margin-bottom: 3.5rem;
+                border-radius: 18px;
+            }
+            .cta-banner h2 {
+                font-size: 1.65rem;
+            }
+            .cta-banner p {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .leak-hero h1 {
+                font-size: 1.75rem;
+            }
+            .leak-hero-img {
+                height: 240px;
+            }
+            .floating-stat-card {
+                gap: 10px;
+                padding: 12px 14px;
+            }
+            .stat-icon {
+                width: 42px;
+                height: 42px;
+            }
+            .solutions-image-grid {
+                grid-template-columns: 1fr;
+                gap: 0.85rem;
+            }
+            .solutions-image-grid img {
+                height: 200px;
+            }
+            .section-title {
+                font-size: 1.55rem;
+            }
+        }
     </style>
 </head>
 <body>
