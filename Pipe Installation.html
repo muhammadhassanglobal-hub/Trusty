@@ -41,7 +41,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body {
+        html, body {
             background-color: var(--light-bg);
             color: var(--text-main);
             line-height: 1.6;
@@ -81,6 +81,7 @@
             width: 55px; height: 55px; border-radius: 50%; border: 3px solid var(--tw-light-blue);
             display: flex; align-items: center; justify-content: center; background-color: var(--white);
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;
+            flex-shrink: 0;
         }
         .ser-image-container img { width: 70%; height: auto; object-fit: contain; }
         .ser-logo-text { display: flex; flex-direction: column; line-height: 1; }
@@ -261,10 +262,12 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-transform: uppercase;
+            text-align: center;
         }
         .btn-orange-3d:hover {
             transform: translateY(-5px) scale(1.03);
@@ -540,7 +543,8 @@
             gap: 1.75rem;
             margin-bottom: 4rem;
         }
-        @media (min-width: 768px) { .pi-timeline { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 640px) { .pi-timeline { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 992px) { .pi-timeline { grid-template-columns: repeat(4, 1fr); } }
 
         .pi-time-step {
             background: #f8fafc;
@@ -576,11 +580,11 @@
         .pi-faq-q {
             width: 100%; padding: 1.25rem 1.5rem; background: none; border: none;
             text-align: left; font-size: 1.05rem; font-weight: 800; color: var(--tw-dark-blue);
-            display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer;
         }
-        .pi-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 1.5rem; color: var(--text-gray); font-size: 0.95rem; }
-        .pi-faq-item.active .pi-faq-a { max-height: 250px; padding-bottom: 1.25rem; }
-        .pi-faq-arrow { transition: transform 0.3s ease; color: var(--tw-light-blue); }
+        .pi-faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; padding: 0 1.5rem; color: var(--text-gray); font-size: 0.95rem; }
+        .pi-faq-item.active .pi-faq-a { max-height: 450px; padding-bottom: 1.25rem; }
+        .pi-faq-arrow { transition: transform 0.3s ease; color: var(--tw-light-blue); flex-shrink: 0; }
         .pi-faq-item.active .pi-faq-arrow { transform: rotate(180deg); }
 
         /* =========================================
@@ -622,12 +626,12 @@
         .fe-footer-list a:hover .fe-link-icon { transform: translateX(4px); }
         .fe-contact-item { display: flex; align-items: flex-start; margin-bottom: 1rem; }
         .fe-contact-icon { width: 1.25rem; height: 1.25rem; color: var(--color-cyan); margin-right: 0.75rem; flex-shrink: 0; margin-top: 0.125rem; }
-        .fe-contact-text { color: var(--color-text-light); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease; }
+        .fe-contact-text { color: var(--color-text-light); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease; word-break: break-word; }
         .fe-contact-text.fe-large { font-size: 1.125rem; font-weight: 500; }
         .fe-contact-text:hover { color: var(--color-cyan); }
-        .fe-footer-bottom { display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding-top: 2rem; border-top: 1px solid var(--color-border); font-size: 0.875rem; gap: 1rem; }
-        @media (min-width: 768px) { .fe-footer-bottom { flex-direction: row; } }
-        .fe-bottom-links { display: flex; gap: 1.5rem; }
+        .fe-footer-bottom { display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding-top: 2rem; border-top: 1px solid var(--color-border); font-size: 0.875rem; gap: 1rem; text-align: center; }
+        @media (min-width: 768px) { .fe-footer-bottom { flex-direction: row; text-align: left; } }
+        .fe-bottom-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
         .fe-bottom-links a { color: var(--color-text-gray); text-decoration: none; transition: color 0.2s ease; }
         .fe-bottom-links a:hover { color: var(--color-cyan); }
 
@@ -635,6 +639,181 @@
         .curve-dividerfoofon { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; transform: translateY(-1px); }
         .curve-dividerfoofon svg { display: block; width: 100%; height: clamp(40px, 6vw, 80px); }
         .curve-dividerfoofon .shape-fillfoofon { fill: var(--white); }
+
+        /* =========================================
+           COMPREHENSIVE MOBILE RESPONSIVENESS
+           ========================================= */
+        @media (max-width: 991px) {
+            .pi-hero {
+                padding: 4rem 0 4.5rem 0;
+            }
+            .pi-hero-layout {
+                gap: 2.5rem;
+            }
+            .pi-materials-sec,
+            .pi-solutions-sec,
+            .pi-warning-sec,
+            .pi-bottom-white {
+                padding: 4rem 0;
+            }
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ser-navbar {
+                height: 80px;
+            }
+            .ser-nav-menu {
+                top: 80px;
+                max-height: calc(100vh - 80px);
+            }
+            .ser-nav-container {
+                padding: 0 16px;
+            }
+            .ser-brand-name {
+                font-size: 1.45rem;
+            }
+            .ser-image-container {
+                width: 46px;
+                height: 46px;
+            }
+
+            .pi-container {
+                padding: 0 16px;
+            }
+
+            .service-badge {
+                font-size: 0.75rem;
+                padding: 6px 14px;
+            }
+            .pi-hero h1 {
+                font-size: 2rem;
+            }
+            .pi-hero p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .pi-cta-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn-orange-3d {
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 0.95rem;
+            }
+
+            .pi-spec-counters {
+                gap: 0.75rem;
+                margin-top: 1.75rem;
+                padding-top: 1.25rem;
+            }
+            .pi-spec-box strong {
+                font-size: 1.25rem;
+            }
+            .pi-spec-box span {
+                font-size: 0.78rem;
+            }
+
+            .pi-bento-tall {
+                height: 280px;
+            }
+            .pi-bento-short {
+                height: 132px;
+            }
+            .pi-pressure-badge {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                grid-column: 1 / -1;
+                margin-top: 0.25rem;
+                justify-content: center;
+                padding: 12px 16px;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .pi-mat-btn {
+                padding: 1rem;
+            }
+            .pi-mat-showcase {
+                padding: 1.5rem 1.25rem;
+            }
+            .pi-mat-showcase.active {
+                gap: 1.5rem;
+            }
+            .pi-mat-img {
+                height: 230px;
+            }
+            .pi-mat-showcase h3 {
+                font-size: 1.45rem !important;
+            }
+            .pi-spec-pills {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .pi-sol-body {
+                padding: 1.5rem;
+            }
+
+            .pi-warn-card {
+                padding: 1.5rem;
+            }
+
+            .pi-timeline {
+                gap: 1.25rem;
+                margin-bottom: 3rem;
+            }
+            .pi-time-step {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .pi-faq-q {
+                padding: 1rem 1.15rem;
+                font-size: 0.95rem;
+            }
+            .pi-faq-a {
+                padding: 0 1.15rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pi-hero h1 {
+                font-size: 1.75rem;
+            }
+            .pi-spec-counters {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1rem;
+            }
+            .pi-bento-visual {
+                grid-template-columns: 1fr;
+            }
+            .pi-bento-tall {
+                height: 230px;
+            }
+            .pi-bento-col {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+            .pi-bento-short {
+                height: 130px;
+            }
+            .pi-mat-img {
+                height: 195px;
+            }
+            .section-title {
+                font-size: 1.55rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -732,7 +911,7 @@
                     </div>
 
                     <div class="pi-pressure-badge">
-                        <div style="width: 42px; height: 42px; background: rgba(0,174,239,0.15); color: var(--tw-light-blue); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 42px; height: 42px; background: rgba(0,174,239,0.15); color: var(--tw-light-blue); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                             <i data-lucide="gauge" style="width: 24px; height: 24px;"></i>
                         </div>
                         <div>
