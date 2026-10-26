@@ -227,6 +227,7 @@
             margin-bottom: 1.2rem;
             box-shadow: 0 4px 12px rgba(0, 174, 239, 0.1);
             transition: var(--transition);
+            max-width: 100%;
         }
         .badge-tag:hover {
             background: var(--tw-light-blue);
@@ -236,7 +237,7 @@
         }
 
         .policy-hero h1 {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 800;
             color: var(--tw-dark-blue);
             line-height: 1.2;
@@ -252,9 +253,6 @@
             color: var(--text-gray);
             max-width: 650px;
             margin: 0 auto;
-        }
-        @media (min-width: 768px) {
-            .policy-hero h1 { font-size: 3.5rem; }
         }
 
         /* ===== POLICY CONTENT SECTION WITH HOVER & ANIMATION ===== */
@@ -292,6 +290,8 @@
             border-left: 4px solid var(--tw-light-blue);
             box-shadow: 0 2px 6px rgba(0, 174, 239, 0.08);
             transition: var(--transition);
+            max-width: 100%;
+            word-wrap: break-word;
         }
         .last-updated:hover {
             transform: translateX(4px);
@@ -423,6 +423,7 @@
             box-shadow: 0 4px 12px rgba(0, 59, 92, 0.05);
             border: 1px solid var(--border-color);
             transition: var(--transition);
+            min-width: 0;
         }
         .contact-card-item:hover {
             transform: translateY(-4px) scale(1.02);
@@ -440,14 +441,142 @@
         .contact-card-item:hover svg {
             transform: scale(1.2) rotate(10deg);
         }
+        .contact-card-item div {
+            min-width: 0;
+            flex: 1;
+        }
         .contact-card-item a {
             color: var(--tw-dark-blue);
             font-weight: 700;
             font-size: 1rem;
             transition: var(--transition);
+            word-break: break-word;
+            display: block;
         }
         .contact-card-item a:hover {
             color: var(--tw-light-blue);
+        }
+
+        /* ===== MOBILE RESPONSIVE BREAKPOINTS ===== */
+        @media (max-width: 768px) {
+            .ser-navbar {
+                height: 80px;
+            }
+            .ser-nav-menu {
+                top: 80px;
+                max-height: calc(100vh - 80px);
+            }
+            .ser-brand-name {
+                font-size: 1.45rem;
+            }
+            .ser-image-container {
+                width: 46px;
+                height: 46px;
+            }
+            .container {
+                padding: 0 16px;
+            }
+            .policy-hero {
+                padding: 3.5rem 0 3rem 0;
+            }
+            .badge-tag {
+                font-size: 0.75rem;
+                padding: 0.4rem 1.1rem;
+            }
+            .policy-hero p {
+                font-size: 0.98rem;
+            }
+            .policy-section {
+                padding: 2.5rem 0 3.5rem 0;
+            }
+            .policy-wrapper {
+                padding: 1.5rem 1.1rem;
+                border-radius: 1.15rem;
+            }
+            .last-updated {
+                font-size: 0.82rem;
+                padding: 0.65rem 1rem;
+                margin-bottom: 1.8rem;
+                display: block;
+            }
+            .policy-block {
+                padding: 1.1rem 0.9rem;
+                margin-bottom: 1.75rem;
+            }
+            .policy-block h2 {
+                font-size: 1.25rem;
+                align-items: flex-start;
+            }
+            .policy-num {
+                width: 2rem;
+                height: 2rem;
+                font-size: 0.9rem;
+                margin-top: 2px;
+            }
+            .policy-block p {
+                font-size: 0.95rem;
+                line-height: 1.65;
+            }
+            .policy-list {
+                padding-left: 0;
+            }
+            .policy-list li {
+                font-size: 0.94rem;
+                padding-left: 1.5rem;
+            }
+            .contact-callout {
+                padding: 1.5rem 1.15rem;
+                margin-top: 2rem;
+                border-radius: 1rem;
+            }
+            .contact-callout h3 {
+                font-size: 1.2rem;
+            }
+            .contact-callout p {
+                font-size: 0.93rem;
+            }
+            .contact-card-item {
+                padding: 1rem 1.1rem;
+            }
+            .contact-card-item a {
+                font-size: 0.92rem;
+            }
+            .fe-footer-bottom {
+                text-align: center;
+            }
+            .fe-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ser-nav-container {
+                padding: 0 16px;
+            }
+            .ser-logo-section {
+                gap: 10px;
+            }
+            .ser-brand-name {
+                font-size: 1.3rem;
+            }
+            .policy-hero h1 {
+                font-size: 1.85rem;
+            }
+            .policy-wrapper {
+                padding: 1.25rem 0.9rem;
+            }
+            .policy-block {
+                padding: 0.9rem 0.65rem;
+                margin-bottom: 1.4rem;
+            }
+            .policy-block h2 {
+                font-size: 1.15rem;
+                gap: 0.6rem;
+            }
+            .contact-callout {
+                padding: 1.25rem 0.95rem;
+            }
         }
 
         /* ===== FOOTER (From he fe.html) ===== */
@@ -547,21 +676,6 @@
             font-weight: 600;
             color: #ffffff;
             margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-        .fe-footer-heading::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--color-cyan);
-            transition: width 0.3s ease;
-        }
-        .fe-footer-col:hover .fe-footer-heading::after {
-            width: 70px;
         }
 
         .fe-footer-list {
@@ -622,6 +736,7 @@
             text-decoration: none;
             font-size: 0.875rem;
             transition: color 0.2s ease;
+            word-break: break-word;
         }
 
         .fe-contact-text.fe-large {
