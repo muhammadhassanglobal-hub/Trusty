@@ -151,6 +151,7 @@
             max-width: 1240px;
             margin: 0 auto;
             padding: 0 24px;
+            width: 100%;
         }
 
         /* Hero Section */
@@ -188,10 +189,11 @@
             letter-spacing: 1.5px;
             margin-bottom: 20px;
             animation: emPulseGlow 2.5s infinite;
+            max-width: 100%;
         }
 
         .em-hero h1 {
-            font-size: clamp(2.3rem, 4.5vw, 3.6rem);
+            font-size: clamp(2.1rem, 4.5vw, 3.6rem);
             font-weight: 900;
             line-height: 1.15;
             margin-bottom: 20px;
@@ -225,11 +227,13 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             text-transform: uppercase;
             box-shadow: 0 12px 25px rgba(34, 211, 238, 0.4);
             transition: var(--transition);
             border: 2px solid var(--tw-light-blue);
+            text-align: center;
         }
         .em-btn-cyan:hover {
             transform: translateY(-5px) scale(1.02);
@@ -249,8 +253,10 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             transition: var(--transition);
+            text-align: center;
         }
         .em-btn-glass:hover {
             background: rgba(34, 211, 238, 0.1);
@@ -320,7 +326,7 @@
             margin-bottom: 8px;
         }
         .em-sec-title {
-            font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+            font-size: clamp(1.75rem, 3.5vw, 2.7rem);
             color: var(--tw-dark-blue);
             font-weight: 900;
             line-height: 1.2;
@@ -333,7 +339,7 @@
 
         .em-grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
             gap: 30px;
         }
         .em-card {
@@ -421,7 +427,7 @@
         }
         .em-dispatch-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
             gap: 24px;
         }
         .em-dispatch-card {
@@ -499,6 +505,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 15px;
             cursor: pointer;
         }
         .em-faq-a {
@@ -510,7 +517,7 @@
             font-size: 0.95rem;
         }
         .em-faq-item.active .em-faq-a {
-            max-height: 240px;
+            max-height: 500px;
             padding-bottom: 20px;
         }
         .em-faq-arrow {
@@ -520,6 +527,117 @@
         }
         .em-faq-item.active .em-faq-arrow {
             transform: rotate(180deg);
+        }
+
+        /* ===== MOBILE RESPONSIVE BREAKPOINTS ===== */
+        @media (max-width: 768px) {
+            .ser-navbar {
+                height: 80px;
+            }
+            .ser-nav-menu {
+                top: 80px;
+                max-height: calc(100vh - 80px);
+            }
+            .ser-brand-name {
+                font-size: 1.45rem;
+            }
+            .ser-image-container {
+                width: 46px;
+                height: 46px;
+            }
+            .em-container {
+                padding: 0 16px;
+            }
+            .em-hero {
+                padding: 50px 0 65px 0;
+            }
+            .em-hero-grid {
+                gap: 35px;
+            }
+            .em-badge {
+                font-size: 0.75rem;
+                padding: 7px 14px;
+                letter-spacing: 0.8px;
+            }
+            .em-hero p {
+                font-size: 1rem;
+                margin-bottom: 24px;
+            }
+            .em-btn-row {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+                margin-bottom: 10px;
+            }
+            .em-btn-cyan, .em-btn-glass {
+                width: 100%;
+                padding: 15px 18px;
+                font-size: 0.88rem;
+            }
+            .em-hero-img-stack {
+                height: 310px;
+            }
+            .em-img-large {
+                width: 92%;
+                height: 265px;
+            }
+            .em-img-small {
+                width: 55%;
+                height: 135px;
+                bottom: 0;
+            }
+            .em-services-sec,
+            .em-dispatch-sec,
+            .em-bottom-white {
+                padding: 60px 0;
+            }
+            .em-sec-head {
+                margin-bottom: 32px;
+            }
+            .em-card-body {
+                padding: 20px;
+            }
+            .em-faq-q {
+                padding: 16px 18px;
+                font-size: 0.96rem;
+            }
+            .em-faq-a {
+                padding: 0 18px;
+                font-size: 0.9rem;
+            }
+            .fe-footer-bottom {
+                text-align: center;
+            }
+            .fe-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ser-nav-container {
+                padding: 0 16px;
+            }
+            .ser-logo-section {
+                gap: 10px;
+            }
+            .ser-brand-name {
+                font-size: 1.3rem;
+            }
+            .em-hero h1 {
+                font-size: 1.85rem;
+            }
+            .em-hero-img-stack {
+                height: 260px;
+            }
+            .em-img-large {
+                width: 95%;
+                height: 220px;
+            }
+            .em-img-small {
+                width: 58%;
+                height: 115px;
+            }
         }
 
         /* ===== FOOTER (Unchanged) ===== */
@@ -547,7 +665,7 @@
         .fe-link-icon { width: 1rem; height: 1rem; color: var(--color-cyan); margin-right: 0.5rem; }
         .fe-contact-item { display: flex; align-items: flex-start; margin-bottom: 1rem; }
         .fe-contact-icon { width: 1.25rem; height: 1.25rem; color: var(--color-cyan); margin-right: 0.75rem; flex-shrink: 0; margin-top: 0.125rem; }
-        .fe-contact-text { color: var(--color-text-light); text-decoration: none; font-size: 0.875rem; }
+        .fe-contact-text { color: var(--color-text-light); text-decoration: none; font-size: 0.875rem; word-break: break-word; }
         .fe-contact-text.fe-large { font-size: 1.125rem; font-weight: 500; }
         .fe-footer-bottom { display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding-top: 2rem; border-top: 1px solid var(--color-border); font-size: 0.875rem; gap: 1rem; }
         @media (min-width: 768px) { .fe-footer-bottom { flex-direction: row; } }
@@ -616,18 +734,18 @@
             <div class="em-hero-grid">
                 <div>
                     <div class="em-badge">
-                        <i data-lucide="alert-triangle" style="width:18px; height:18px;"></i>
-                        24/7 Emergency Rapid Dispatch
+                        <i data-lucide="alert-triangle" style="width:18px; height:18px; flex-shrink:0;"></i>
+                        <span>24/7 Emergency Rapid Dispatch</span>
                     </div>
                     <h1>Plumbing Crisis? <span>We Arrive in 45 Mins</span> or Less!</h1>
                     <p>Burst pipes, overflowing toilets, or major water heater floods don't wait for business hours. Our licensed emergency plumbers are standing by day and night to stop water damage immediately.</p>
                     
                     <div class="em-btn-row">
                         <a href="tel:+13214858055" class="em-btn-cyan">
-                            <i data-lucide="phone-call"></i> Emergency Hotline: +1 (321) 485-8055
+                            <i data-lucide="phone-call" style="flex-shrink:0;"></i> Emergency Hotline: +1 (321) 485-8055
                         </a>
                         <a href="#services" class="em-btn-glass">
-                            View Emergency Services <i data-lucide="chevron-down"></i>
+                            View Emergency Services <i data-lucide="chevron-down" style="flex-shrink:0;"></i>
                         </a>
                     </div>
                 </div>
@@ -830,7 +948,7 @@
                                 Terms of service
                             </a>
                         </li>
-	 <li>
+                        <li>
                             <a href=" tel:+13214858055" >
                                 <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                  Contact Us
@@ -873,7 +991,7 @@
                                 Commercial Plumbing
                             </a>
                         </li>
-   <li>
+                        <li>
                             <a href="Emergency Plumbing.html">
                                 <svg class="fe-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                 24/7 Emergency
@@ -903,7 +1021,6 @@
                     <a href=" Terms of service.html">Terms of Service</a>
                 </div>
             </div>
-            </div>
         </div>
     </footer>
 
@@ -919,6 +1036,16 @@
 
         menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('ser-active');
+            const spans = menuToggle.getElementsByTagName('span');
+            if(navMenu.classList.contains('ser-active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
         });
 
         servicesDropdown.addEventListener('click', (e) => {
