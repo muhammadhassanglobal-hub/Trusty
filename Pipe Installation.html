@@ -166,7 +166,7 @@
         .pi-hero {
             background: linear-gradient(135deg, var(--tw-dark-blue) 0%, var(--primary-hover) 100%);
             color: var(--white);
-            padding: 6rem 0;
+            padding: 3rem 0;
             position: relative;
             overflow: hidden;
         }
@@ -189,7 +189,7 @@
         .pi-hero-layout {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 3rem;
+            gap: 2rem;
             align-items: center;
         }
 
@@ -203,14 +203,14 @@
             gap: 8px;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(8px);
-            padding: 8px 18px;
+            padding: 6px 16px;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #7dd3fc;
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.85rem;
             border: 1px solid rgba(0, 174, 239, 0.4);
             transition: var(--transition);
         }
@@ -221,13 +221,13 @@
         }
 
         .pi-hero h1 {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             font-weight: 800;
             line-height: 1.15;
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.85rem;
         }
         @media (min-width: 768px) {
-            .pi-hero h1 { font-size: 3.4rem; }
+            .pi-hero h1 { font-size: 3rem; }
         }
 
         .pi-hero h1 span {
@@ -239,9 +239,9 @@
         }
 
         .pi-hero p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #cbd5e1;
-            margin-bottom: 2rem;
+            margin-bottom: 1.35rem;
             max-width: 580px;
         }
 
@@ -255,9 +255,9 @@
         .btn-orange-3d {
             background: linear-gradient(135deg, var(--secondary-orange) 0%, #d97706 100%);
             color: var(--white);
-            padding: 16px 34px;
+            padding: 14px 28px;
             border-radius: 12px;
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 800;
             text-decoration: none;
             display: inline-flex;
@@ -275,24 +275,92 @@
             background: linear-gradient(135deg, #fb923c 0%, var(--secondary-orange) 100%);
         }
 
+        /* Redesigned Interactive Mobile-First Stats / Rating Section */
         .pi-spec-counters {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 2.25rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
+
+        .pi-spec-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 174, 239, 0.25);
+            border-radius: 14px;
+            padding: 0.85rem 0.75rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .pi-spec-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: 0.5s;
+        }
+
+        .pi-spec-box:hover::before {
+            left: 100%;
+        }
+
+        .pi-spec-box:hover {
+            transform: translateY(-8px) scale(1.03);
+            border-color: var(--tw-light-blue);
+            background: rgba(0, 174, 239, 0.2);
+            box-shadow: 0 20px 35px rgba(0, 174, 239, 0.3);
+        }
+
+        .pi-spec-icon-wrapper {
+            width: 36px;
+            height: 36px;
+            margin: 0 auto 0.5rem auto;
+            background: rgba(0, 174, 239, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--tw-light-blue);
+            transition: var(--transition);
+        }
+
+        .pi-spec-box:hover .pi-spec-icon-wrapper {
+            background: var(--tw-light-blue);
+            color: var(--white);
+            transform: rotate(360deg);
+        }
+
         .pi-spec-box strong {
             display: block;
             font-size: 1.5rem;
             color: var(--tw-light-blue);
             font-weight: 800;
+            line-height: 1.2;
+            transition: var(--transition);
         }
+
+        .pi-spec-box:hover strong {
+            color: var(--white);
+            text-shadow: 0 0 12px rgba(0, 174, 239, 0.8);
+        }
+
         .pi-spec-box span {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #cbd5e1;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+            display: block;
         }
 
         /* Bento Images */
@@ -300,10 +368,10 @@
             position: relative;
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            gap: 1rem;
+            gap: 0.85rem;
         }
         .pi-bento-tall {
-            height: 380px;
+            height: 320px;
             border-radius: 20px;
             overflow: hidden;
             border: 4px solid rgba(0, 174, 239, 0.4);
@@ -323,10 +391,10 @@
         .pi-bento-col {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.85rem;
         }
         .pi-bento-short {
-            height: 182px;
+            height: 153px;
             border-radius: 16px;
             overflow: hidden;
             border: 3px solid rgba(0, 174, 239, 0.4);
@@ -645,10 +713,10 @@
            ========================================= */
         @media (max-width: 991px) {
             .pi-hero {
-                padding: 4rem 0 4.5rem 0;
+                padding: 2.25rem 0 2.75rem 0;
             }
             .pi-hero-layout {
-                gap: 2.5rem;
+                gap: 1.75rem;
             }
             .pi-materials-sec,
             .pi-solutions-sec,
@@ -684,16 +752,24 @@
                 padding: 0 16px;
             }
 
+            .pi-hero {
+                padding: 1.75rem 0 2.25rem 0;
+            }
+            .pi-hero-layout {
+                gap: 1.5rem;
+            }
             .service-badge {
-                font-size: 0.75rem;
-                padding: 6px 14px;
+                font-size: 0.72rem;
+                padding: 5px 12px;
+                margin-bottom: 0.65rem;
             }
             .pi-hero h1 {
-                font-size: 2rem;
+                font-size: 1.85rem;
+                margin-bottom: 0.65rem;
             }
             .pi-hero p {
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
+                font-size: 0.95rem;
+                margin-bottom: 1.15rem;
             }
 
             .pi-cta-group {
@@ -702,36 +778,36 @@
             }
             .btn-orange-3d {
                 width: 100%;
-                padding: 15px 20px;
-                font-size: 0.95rem;
+                padding: 13px 18px;
+                font-size: 0.92rem;
             }
 
             .pi-spec-counters {
-                gap: 0.75rem;
-                margin-top: 1.75rem;
-                padding-top: 1.25rem;
+                gap: 0.6rem;
+                margin-top: 1.25rem;
+                padding-top: 1rem;
             }
             .pi-spec-box strong {
-                font-size: 1.25rem;
+                font-size: 1.15rem;
             }
             .pi-spec-box span {
-                font-size: 0.78rem;
+                font-size: 0.7rem;
             }
 
             .pi-bento-tall {
-                height: 280px;
+                height: 220px;
             }
             .pi-bento-short {
-                height: 132px;
+                height: 105px;
             }
             .pi-pressure-badge {
                 position: relative;
                 bottom: auto;
                 left: auto;
                 grid-column: 1 / -1;
-                margin-top: 0.25rem;
+                margin-top: 0.15rem;
                 justify-content: center;
-                padding: 12px 16px;
+                padding: 10px 14px;
             }
 
             .section-title {
@@ -785,27 +861,50 @@
         }
 
         @media (max-width: 480px) {
+            .pi-hero {
+                padding: 1.35rem 0 1.75rem 0;
+            }
             .pi-hero h1 {
-                font-size: 1.75rem;
+                font-size: 1.65rem;
             }
             .pi-spec-counters {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 1rem;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.45rem;
+                margin-top: 1rem;
+                padding-top: 0.85rem;
+            }
+            .pi-spec-box {
+                padding: 0.7rem 0.35rem;
+            }
+            .pi-spec-box strong {
+                font-size: 1rem;
+            }
+            .pi-spec-box span {
+                font-size: 0.62rem;
+            }
+            .pi-spec-icon-wrapper {
+                width: 26px;
+                height: 26px;
+                margin-bottom: 0.25rem;
+            }
+            .pi-spec-icon-wrapper svg {
+                width: 13px;
+                height: 13px;
             }
             .pi-bento-visual {
                 grid-template-columns: 1fr;
+                gap: 0.65rem;
             }
             .pi-bento-tall {
-                height: 230px;
+                height: 190px;
             }
             .pi-bento-col {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 0.75rem;
+                gap: 0.65rem;
             }
             .pi-bento-short {
-                height: 130px;
+                height: 110px;
             }
             .pi-mat-img {
                 height: 195px;
@@ -883,14 +982,23 @@
 
                     <div class="pi-spec-counters">
                         <div class="pi-spec-box">
+                            <div class="pi-spec-icon-wrapper">
+                                <i data-lucide="shield-check" style="width: 18px; height: 18px;"></i>
+                            </div>
                             <strong>50+ Yrs</strong>
                             <span>Lifespan</span>
                         </div>
                         <div class="pi-spec-box">
+                            <div class="pi-spec-icon-wrapper">
+                                <i data-lucide="zap" style="width: 18px; height: 18px;"></i>
+                            </div>
                             <strong>1–2 Days</strong>
                             <span>Turnkey Job</span>
                         </div>
                         <div class="pi-spec-box">
+                            <div class="pi-spec-icon-wrapper">
+                                <i data-lucide="check-circle-2" style="width: 18px; height: 18px;"></i>
+                            </div>
                             <strong>100%</strong>
                             <span>Patch Included</span>
                         </div>
@@ -1333,7 +1441,7 @@
                     <h3 class="fe-footer-heading">Contact Info</h3>
                     
                     <div class="fe-contact-item">
-                        <svg class="fe-contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <svg class="fe-contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a11 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                         <a href="tel:8005550199" class="fe-contact-text fe-large">(800) 555-0199</a>
                     </div>
                     
