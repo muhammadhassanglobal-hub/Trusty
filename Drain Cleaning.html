@@ -34,7 +34,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body {
+        html, body {
             background-color: var(--light-bg);
             color: var(--text-main);
             line-height: 1.6;
@@ -74,6 +74,7 @@
             width: 55px; height: 55px; border-radius: 50%; border: 3px solid var(--tw-light-blue);
             display: flex; align-items: center; justify-content: center; background-color: var(--white);
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;
+            flex-shrink: 0;
         }
         .ser-image-container img { width: 70%; height: auto; object-fit: contain; }
         .ser-logo-text { display: flex; flex-direction: column; line-height: 1; }
@@ -162,6 +163,7 @@
             max-width: 1240px;
             margin: 0 auto;
             padding: 0 24px;
+            width: 100%;
         }
 
         /* --- 1. Modern Split Collage Hero --- */
@@ -216,6 +218,7 @@
             background: var(--tw-light-blue);
             border-radius: 50%;
             animation: dcPulseGlow 2s infinite;
+            flex-shrink: 0;
         }
 
         .dc-hero-title {
@@ -267,11 +270,13 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
             box-shadow: 0 12px 25px -5px rgba(249, 115, 22, 0.45);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            text-align: center;
         }
         .dc-cta-btn:hover {
             transform: translateY(-5px) scale(1.03);
@@ -289,8 +294,10 @@
             border: 2px solid #cbd5e1;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             transition: var(--transition);
+            text-align: center;
         }
         .dc-secondary-btn:hover {
             border-color: var(--tw-light-blue);
@@ -477,7 +484,7 @@
 
         .dc-photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 32px;
         }
 
@@ -671,6 +678,7 @@
             font-size: 2rem;
             margin-bottom: 16px;
             color: var(--white);
+            line-height: 1.25;
         }
         .dc-tech-content h3 span {
             color: var(--tw-light-blue);
@@ -750,6 +758,7 @@
         .dc-comp-header h3 {
             font-size: 1.45rem;
             color: var(--tw-dark-blue);
+            line-height: 1.25;
         }
         .dc-comp-list {
             list-style: none;
@@ -798,6 +807,7 @@
         .dc-side-Visual h3 {
             font-size: 1.6rem;
             margin-bottom: 12px;
+            line-height: 1.25;
         }
         .dc-side-Visual p {
             color: #cbd5e1;
@@ -828,6 +838,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 14px;
             cursor: pointer;
         }
         .dc-faq-a {
@@ -843,7 +854,7 @@
             box-shadow: 0 10px 25px rgba(0, 59, 92, 0.08);
         }
         .dc-faq-item.active .dc-faq-a {
-            max-height: 240px;
+            max-height: 450px;
             padding-bottom: 20px;
         }
         .dc-faq-arrow {
@@ -990,6 +1001,7 @@
             text-decoration: none;
             font-size: 0.875rem;
             transition: color 0.2s ease;
+            word-break: break-word;
         }
 
         .fe-contact-text.fe-large {
@@ -1010,16 +1022,20 @@
             border-top: 1px solid var(--color-border);
             font-size: 0.875rem;
             gap: 1rem;
+            text-align: center;
         }
 
         @media (min-width: 768px) {
             .fe-footer-bottom {
                 flex-direction: row;
+                text-align: left;
             }
         }
 
         .fe-bottom-links {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1.5rem;
         }
 
@@ -1037,6 +1053,256 @@
         .curve-dividerfoofon { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; transform: translateY(-1px); }
         .curve-dividerfoofon svg { display: block; width: 100%; height: clamp(40px, 6vw, 80px); }
         .curve-dividerfoofon .shape-fillfoofon { fill: var(--white); }
+
+        /* =========================================
+           COMPREHENSIVE MOBILE RESPONSIVENESS
+           ========================================= */
+        @media (max-width: 991px) {
+            .dc-hero {
+                padding: 45px 0 90px 0;
+            }
+            .dc-hero-wrapper {
+                gap: 40px;
+            }
+            .dc-collage-box {
+                max-width: 580px;
+                margin: 0 auto;
+                width: 100%;
+                height: 420px;
+            }
+            .dc-img-main {
+                height: 360px;
+            }
+            .dc-img-sub {
+                height: 180px;
+            }
+            .dc-section,
+            .dc-tech-sec,
+            .dc-faq-section {
+                padding: 65px 0;
+            }
+            .dc-sec-head {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ser-navbar {
+                height: 80px;
+            }
+            .ser-nav-menu {
+                top: 80px;
+                max-height: calc(100vh - 80px);
+            }
+            .ser-nav-container {
+                padding: 0 16px;
+            }
+            .ser-brand-name {
+                font-size: 1.45rem;
+            }
+            .ser-image-container {
+                width: 46px;
+                height: 46px;
+            }
+
+            .dc-container {
+                padding: 0 16px;
+            }
+
+            .dc-pill-tag {
+                font-size: 0.75rem;
+                padding: 6px 14px;
+            }
+            .dc-hero-title {
+                font-size: 2.1rem;
+            }
+            .dc-hero-lead {
+                font-size: 1rem;
+                margin-bottom: 24px;
+            }
+
+            .dc-hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                margin-bottom: 28px;
+            }
+            .dc-cta-btn,
+            .dc-secondary-btn {
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 0.95rem;
+            }
+
+            .dc-mini-features {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding-top: 20px;
+            }
+
+            .dc-collage-box {
+                height: 340px;
+            }
+            .dc-img-main {
+                width: 88%;
+                height: 290px;
+                border-width: 5px;
+                border-radius: 20px;
+            }
+            .dc-img-sub {
+                width: 55%;
+                height: 145px;
+                bottom: -10px;
+                border-width: 4px;
+                border-radius: 16px;
+            }
+            .dc-float-card {
+                padding: 12px 16px;
+                top: 5px;
+                border-radius: 14px;
+                gap: 10px;
+            }
+            .dc-float-card strong {
+                font-size: 1.1rem;
+            }
+            .dc-float-card span {
+                font-size: 0.72rem;
+            }
+
+            .dc-stats-ribbon {
+                margin-top: -40px;
+            }
+            .dc-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 24px 16px;
+                gap: 16px;
+            }
+            .dc-stat-box {
+                padding: 10px 6px;
+                border-bottom: none;
+            }
+            .dc-stat-num {
+                font-size: 1.8rem;
+            }
+            .dc-stat-label {
+                font-size: 0.78rem;
+            }
+
+            .dc-photo-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .dc-card-img-wrap {
+                height: 200px;
+            }
+            .dc-card-body {
+                padding: 18px 20px 24px 20px;
+            }
+
+            .dc-tabs-nav {
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 30px;
+            }
+            .dc-tab-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 18px;
+                font-size: 0.92rem;
+            }
+            .dc-tab-panel {
+                padding: 24px 18px;
+                border-radius: 18px;
+            }
+            .dc-tab-panel.active {
+                gap: 24px;
+            }
+            .dc-tech-img {
+                height: 230px;
+            }
+            .dc-tech-content h3 {
+                font-size: 1.5rem;
+            }
+            .dc-tech-content p {
+                font-size: 0.95rem;
+            }
+            .dc-tech-perks {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-bottom: 24px;
+            }
+
+            .dc-comp-card {
+                padding: 26px 20px;
+            }
+            .dc-comp-header {
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+            .dc-comp-icon {
+                width: 46px;
+                height: 46px;
+            }
+            .dc-comp-header h3 {
+                font-size: 1.25rem;
+            }
+            .dc-comp-list li {
+                font-size: 0.92rem;
+            }
+
+            .dc-side-Visual {
+                padding: 24px 20px;
+            }
+            .dc-side-Visual img {
+                height: 190px;
+            }
+            .dc-side-Visual h3 {
+                font-size: 1.4rem;
+            }
+            .dc-faq-q {
+                padding: 16px 18px;
+                font-size: 0.95rem;
+            }
+            .dc-faq-a {
+                padding: 0 18px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dc-hero-title {
+                font-size: 1.85rem;
+            }
+            .dc-collage-box {
+                height: 290px;
+            }
+            .dc-img-main {
+                width: 92%;
+                height: 245px;
+            }
+            .dc-img-sub {
+                width: 58%;
+                height: 125px;
+            }
+            .dc-float-card {
+                padding: 10px 12px;
+            }
+            .dc-float-card strong {
+                font-size: 1rem;
+            }
+            .dc-stats-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .dc-stat-box {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+                padding-bottom: 14px;
+            }
+            .dc-stat-box:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+        }
     </style>
 </head>
 <body>
