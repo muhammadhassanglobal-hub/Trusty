@@ -70,6 +70,7 @@
             width: 55px; height: 55px; border-radius: 50%; border: 3px solid var(--theme-cyan);
             display: flex; align-items: center; justify-content: center; background-color: var(--theme-white);
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden;
+            flex-shrink: 0;
         }
         .ser-image-container img { width: 70%; height: auto; object-fit: contain; }
         .ser-logo-text { display: flex; flex-direction: column; line-height: 1; }
@@ -138,11 +139,6 @@
             50% { transform: translateY(-10px); }
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4); }
-            50% { box-shadow: 0 0 0 16px rgba(34, 211, 238, 0); }
-        }
-
         .wh-container {
             max-width: 1250px;
             margin: 0 auto;
@@ -154,7 +150,7 @@
         .wh-hero {
             background: linear-gradient(135deg, var(--theme-deep-blue) 0%, #020617 100%);
             color: var(--theme-white);
-            padding: 90px 0;
+            padding: clamp(50px, 8vw, 90px) 0;
             position: relative;
             overflow: hidden;
         }
@@ -162,7 +158,7 @@
         .wh-hero-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 50px;
+            gap: 40px;
             align-items: center;
         }
         @media (min-width: 992px) {
@@ -191,7 +187,7 @@
         }
 
         .wh-hero-title {
-            font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+            font-size: clamp(2.1rem, 4.5vw, 3.6rem);
             font-weight: 900;
             line-height: 1.15;
             margin-bottom: 20px;
@@ -202,9 +198,9 @@
         }
 
         .wh-hero-desc {
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.2vw, 1.1rem);
             color: #cbd5e1;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             max-width: 600px;
         }
 
@@ -212,24 +208,27 @@
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .wh-btn-primary {
             background: linear-gradient(135deg, var(--theme-cyan), var(--theme-deep-blue));
             color: var(--theme-white);
-            padding: 16px 32px;
+            padding: 15px 28px;
             border-radius: 12px;
             font-weight: 800;
             font-size: 0.95rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             box-shadow: 0 10px 25px -5px rgba(34, 211, 238, 0.4);
             transition: var(--theme-transition);
             text-transform: uppercase;
             border: 2px solid var(--theme-cyan);
+            flex: 1 1 auto;
+            text-align: center;
         }
         .wh-btn-primary:hover {
             transform: translateY(-5px) scale(1.02);
@@ -242,15 +241,18 @@
             background: rgba(255, 255, 255, 0.05);
             color: var(--theme-white);
             border: 2px solid rgba(255, 255, 255, 0.2);
-            padding: 16px 28px;
+            padding: 15px 24px;
             border-radius: 12px;
             font-weight: 700;
             font-size: 0.95rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             transition: var(--theme-transition);
+            flex: 1 1 auto;
+            text-align: center;
         }
         .wh-btn-outline:hover {
             border-color: var(--theme-cyan);
@@ -264,11 +266,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
         }
         .wh-hero-img-wrap {
             width: 100%;
             max-width: 480px;
-            height: 450px;
+            height: clamp(300px, 50vw, 450px);
             border-radius: 24px;
             overflow: hidden;
             border: 4px solid var(--theme-cyan);
@@ -287,29 +290,39 @@
 
         .wh-floating-badge {
             position: absolute;
-            bottom: 25px;
-            left: -20px;
+            bottom: 20px;
+            left: 10px;
             background: var(--theme-white);
             color: var(--theme-deep-blue);
-            padding: 16px 24px;
+            padding: 14px 18px;
             border-radius: 16px;
             box-shadow: 0 20px 35px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             animation: floatEffect 4s ease-in-out infinite;
             border-left: 5px solid var(--theme-cyan);
             z-index: 3;
         }
         .wh-floating-badge i {
             color: var(--theme-cyan);
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .wh-floating-badge {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                padding: 10px 14px;
+            }
         }
 
         /* --- 2. Symptoms Section --- */
         .wh-section {
-            padding: 90px 0;
+            padding: clamp(50px, 8vw, 90px) 0;
             background-color: var(--theme-white);
         }
         .wh-section.alt {
@@ -319,7 +332,8 @@
         .wh-section-header {
             text-align: center;
             max-width: 700px;
-            margin: 0 auto 60px auto;
+            margin: 0 auto clamp(30px, 6vw, 60px) auto;
+            padding: 0 15px;
         }
         .wh-section-header span {
             color: var(--theme-cyan);
@@ -331,27 +345,28 @@
             margin-bottom: 8px;
         }
         .wh-section-header h2 {
-            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-size: clamp(1.85rem, 3.5vw, 2.75rem);
             color: var(--theme-deep-blue);
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            line-height: 1.2;
         }
         .wh-section-header p {
             color: var(--theme-text-gray);
-            font-size: 1.05rem;
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
         }
 
         .wh-symptom-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
+            gap: 25px;
         }
 
         .wh-symptom-card {
             background: var(--theme-white);
             border: 2px solid var(--theme-border);
             border-radius: 20px;
-            padding: 35px 25px;
+            padding: clamp(25px, 4vw, 35px) clamp(20px, 3vw, 25px);
             transition: var(--theme-transition);
             position: relative;
             overflow: hidden;
@@ -370,7 +385,7 @@
             transition: transform 0.4s ease;
         }
         .wh-symptom-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border-color: var(--theme-cyan);
             box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
         }
@@ -379,8 +394,8 @@
         }
 
         .wh-sym-icon {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 16px;
             background: rgba(34, 211, 238, 0.12);
             color: var(--theme-deep-blue);
@@ -389,6 +404,7 @@
             justify-content: center;
             margin-bottom: 20px;
             transition: var(--theme-transition);
+            flex-shrink: 0;
         }
         .wh-symptom-card:hover .wh-sym-icon {
             background: var(--theme-cyan);
@@ -396,15 +412,15 @@
             transform: rotate(10deg) scale(1.1);
         }
         .wh-symptom-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: var(--theme-deep-blue);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: 800;
         }
         .wh-symptom-card p {
             color: var(--theme-text-gray);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
+            font-size: 0.92rem;
+            margin-bottom: 18px;
         }
         .wh-sym-fix {
             font-size: 0.85rem;
@@ -416,13 +432,15 @@
         }
         .wh-sym-fix i {
             color: var(--theme-cyan);
+            flex-shrink: 0;
         }
 
         /* --- 3. Interactive Switcher Section --- */
         .wh-toggle-wrap {
             display: flex;
             justify-content: center;
-            margin-bottom: 45px;
+            margin-bottom: 35px;
+            padding: 0 10px;
         }
         .wh-toggle-container {
             background: var(--theme-white);
@@ -434,20 +452,24 @@
             border: 2px solid var(--theme-border);
             flex-wrap: wrap;
             justify-content: center;
+            width: 100%;
+            max-width: 480px;
         }
         .wh-toggle-btn {
-            padding: 12px 24px;
+            padding: 12px 20px;
             border-radius: 40px;
             border: none;
             background: transparent;
             color: var(--theme-deep-blue);
             font-weight: 800;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             cursor: pointer;
             transition: var(--theme-transition);
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            flex: 1;
         }
         .wh-toggle-btn.active {
             background: var(--theme-deep-blue);
@@ -459,7 +481,7 @@
             display: none;
             background: var(--theme-white);
             border-radius: 24px;
-            padding: 40px;
+            padding: clamp(25px, 5vw, 40px);
             box-shadow: 0 20px 40px rgba(0, 59, 92, 0.08);
             border: 2px solid var(--theme-border);
             animation: fadeIn 0.4s ease forwards;
@@ -467,11 +489,11 @@
         .wh-sys-panel.active {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 40px;
+            gap: 30px;
             align-items: center;
         }
         @media (min-width: 992px) {
-            .wh-sys-panel.active { grid-template-columns: 1fr 1fr; }
+            .wh-sys-panel.active { grid-template-columns: 1fr 1fr; gap: 40px; }
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
@@ -479,11 +501,12 @@
         }
 
         .wh-sys-img {
-            height: 380px;
+            height: clamp(260px, 40vw, 380px);
             border-radius: 18px;
             overflow: hidden;
             position: relative;
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            width: 100%;
         }
         .wh-sys-img img {
             width: 100%;
@@ -495,39 +518,43 @@
             transform: scale(1.06);
         }
         .wh-sys-content h3 {
-            font-size: 2rem;
+            font-size: clamp(1.6rem, 3vw, 2rem);
             color: var(--theme-deep-blue);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: 900;
         }
         .wh-sys-content p {
             color: var(--theme-text-main);
-            font-size: 1.05rem;
-            margin-bottom: 25px;
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
+            margin-bottom: 20px;
         }
         .wh-check-list {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 30px;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        @media (min-width: 640px) {
+            .wh-check-list { grid-template-columns: 1fr 1fr; }
         }
         .wh-check-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: var(--theme-deep-blue);
         }
         .wh-check-item i {
             color: var(--theme-cyan);
+            flex-shrink: 0;
         }
 
         /* --- 4. Photo Cards Services Grid --- */
         .wh-card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
         .wh-service-card {
             background: var(--theme-white);
@@ -540,12 +567,12 @@
             flex-direction: column;
         }
         .wh-service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border-color: var(--theme-cyan);
             box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
         }
         .wh-scard-img {
-            height: 220px;
+            height: 200px;
             overflow: hidden;
             position: relative;
         }
@@ -559,22 +586,22 @@
             transform: scale(1.1);
         }
         .wh-scard-body {
-            padding: 30px 25px;
+            padding: clamp(20px, 4vw, 30px) clamp(18px, 3vw, 25px);
             display: flex;
             flex-direction: column;
             flex-grow: 1;
             justify-content: space-between;
         }
         .wh-scard-body h3 {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             color: var(--theme-deep-blue);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: 800;
         }
         .wh-scard-body p {
             color: var(--theme-text-gray);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
+            font-size: 0.92rem;
+            margin-bottom: 16px;
         }
         .wh-scard-link {
             color: var(--theme-deep-blue);
@@ -588,7 +615,7 @@
         }
         .wh-service-card:hover .wh-scard-link {
             color: var(--theme-cyan);
-            gap: 12px;
+            gap: 10px;
         }
 
         /* --- 5. FAQ Accordion --- */
@@ -600,7 +627,7 @@
             background: var(--theme-white);
             border: 2px solid var(--theme-border);
             border-radius: 14px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             overflow: hidden;
             transition: var(--theme-transition);
         }
@@ -610,25 +637,26 @@
         }
         .wh-faq-question {
             width: 100%;
-            padding: 20px 24px;
+            padding: clamp(16px, 3vw, 20px) clamp(18px, 3vw, 24px);
             background: none;
             border: none;
             text-align: left;
-            font-size: 1.05rem;
+            font-size: clamp(0.98rem, 2vw, 1.05rem);
             font-weight: 800;
             color: var(--theme-deep-blue);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
             cursor: pointer;
         }
         .wh-faq-answer {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.35s ease;
-            padding: 0 24px;
+            padding: 0 clamp(18px, 3vw, 24px);
             color: var(--theme-text-main);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
         }
         .wh-faq-item.active .wh-faq-answer {
             max-height: 250px;
@@ -754,6 +782,7 @@
             color: var(--color-cyan);
             margin-right: 0.5rem;
             transition: transform 0.2s ease;
+            flex-shrink: 0;
         }
 
         .fe-footer-list a:hover .fe-link-icon {
@@ -780,6 +809,7 @@
             text-decoration: none;
             font-size: 0.875rem;
             transition: color 0.2s ease;
+            word-break: break-word;
         }
 
         .fe-contact-text.fe-large {
@@ -800,17 +830,21 @@
             border-top: 1px solid var(--color-border);
             font-size: 0.875rem;
             gap: 1rem;
+            text-align: center;
         }
 
         @media (min-width: 768px) {
             .fe-footer-bottom {
                 flex-direction: row;
+                text-align: left;
             }
         }
 
         .fe-bottom-links {
             display: flex;
             gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .fe-bottom-links a {
@@ -823,7 +857,7 @@
             color: var(--color-cyan);
         }
 
-        .footer-containerfoofon { background: linear-gradient(145deg, #020617, #0f172a); color: var(--white); position: relative; padding-top: clamp(80px, 12vw, 120px); padding-bottom: 30px; display: flex; flex-direction: column; align-items: center; width: 100%; }
+        .footer-containerfoofon { background: linear-gradient(145deg, #020617, #0f172a); color: var(--theme-white); position: relative; padding-top: clamp(80px, 12vw, 120px); padding-bottom: 30px; display: flex; flex-direction: column; align-items: center; width: 100%; }
         .curve-dividerfoofon { position: absolute; top: 0; left: 0; width: 100%; line-height: 0; transform: translateY(-1px); }
         .curve-dividerfoofon svg { display: block; width: 100%; height: clamp(40px, 6vw, 80px); }
         .curve-dividerfoofon .shape-fillfoofon { fill: var(--theme-white); }
@@ -904,8 +938,8 @@
                     <div class="wh-floating-badge">
                         <i data-lucide="shield-check"></i>
                         <div>
-                            <strong style="display:block; font-size:1rem;">12-Year Warranty</strong>
-                            <span style="font-size:0.8rem; color:var(--theme-text-gray);">On New Installs</span>
+                            <strong style="display:block; font-size:0.95rem;">12-Year Warranty</strong>
+                            <span style="font-size:0.75rem; color:var(--theme-text-gray);">On New Installs</span>
                         </div>
                     </div>
                 </div>
