@@ -150,6 +150,7 @@
             max-width: 1240px;
             margin: 0 auto;
             padding: 0 24px;
+            width: 100%;
         }
 
         /* Hero Section */
@@ -187,6 +188,7 @@
             letter-spacing: 1.5px;
             margin-bottom: 20px;
             transition: var(--transition);
+            max-width: 100%;
         }
         .cp-badge:hover {
             transform: scale(1.05);
@@ -194,7 +196,7 @@
         }
 
         .cp-hero h1 {
-            font-size: clamp(2.3rem, 4.5vw, 3.6rem);
+            font-size: clamp(2.1rem, 4.5vw, 3.6rem);
             font-weight: 900;
             line-height: 1.15;
             margin-bottom: 20px;
@@ -228,11 +230,13 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             text-transform: uppercase;
             box-shadow: 0 12px 25px rgba(34, 211, 238, 0.4);
             transition: var(--transition);
             border: 2px solid var(--tw-light-blue);
+            text-align: center;
         }
         .cp-btn-cyan:hover {
             transform: translateY(-5px) scale(1.02);
@@ -252,8 +256,10 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             transition: var(--transition);
+            text-align: center;
         }
         .cp-btn-glass:hover {
             background: rgba(34, 211, 238, 0.1);
@@ -323,7 +329,7 @@
             margin-bottom: 8px;
         }
         .cp-sec-title {
-            font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+            font-size: clamp(1.75rem, 3.5vw, 2.7rem);
             color: var(--tw-dark-blue);
             font-weight: 900;
             line-height: 1.2;
@@ -353,6 +359,7 @@
             transition: var(--transition);
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
         }
         .cp-tab-btn:hover {
@@ -445,7 +452,7 @@
         }
         .cp-grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
             gap: 30px;
         }
         .cp-card {
@@ -533,7 +540,7 @@
         }
         .cp-sla-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
             gap: 24px;
         }
         .cp-sla-card {
@@ -611,6 +618,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 15px;
             cursor: pointer;
         }
         .cp-faq-a {
@@ -622,7 +630,7 @@
             font-size: 0.95rem;
         }
         .cp-faq-item.active .cp-faq-a {
-            max-height: 240px;
+            max-height: 500px;
             padding-bottom: 20px;
         }
         .cp-faq-arrow {
@@ -632,6 +640,148 @@
         }
         .cp-faq-item.active .cp-faq-arrow {
             transform: rotate(180deg);
+        }
+
+        /* ===== MOBILE RESPONSIVE BREAKPOINTS ===== */
+        @media (max-width: 768px) {
+            .ser-navbar {
+                height: 80px;
+            }
+            .ser-nav-menu {
+                top: 80px;
+                max-height: calc(100vh - 80px);
+            }
+            .ser-brand-name {
+                font-size: 1.45rem;
+            }
+            .ser-image-container {
+                width: 46px;
+                height: 46px;
+            }
+            .cp-container {
+                padding: 0 16px;
+            }
+            .cp-hero {
+                padding: 50px 0 65px 0;
+            }
+            .cp-hero-grid {
+                gap: 35px;
+            }
+            .cp-badge {
+                font-size: 0.75rem;
+                padding: 7px 14px;
+                letter-spacing: 0.8px;
+            }
+            .cp-hero p {
+                font-size: 1rem;
+                margin-bottom: 24px;
+            }
+            .cp-btn-row {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+                margin-bottom: 10px;
+            }
+            .cp-btn-cyan, .cp-btn-glass {
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 0.9rem;
+            }
+            .cp-hero-img-stack {
+                height: 310px;
+            }
+            .cp-img-large {
+                width: 92%;
+                height: 265px;
+            }
+            .cp-img-small {
+                width: 55%;
+                height: 135px;
+                bottom: 0;
+            }
+            .cp-facility-sec,
+            .cp-solutions-sec,
+            .cp-sla-sec,
+            .cp-bottom-white {
+                padding: 60px 0;
+            }
+            .cp-sec-head {
+                margin-bottom: 32px;
+            }
+            .cp-tab-buttons {
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 28px;
+            }
+            .cp-tab-btn {
+                width: 100%;
+                padding: 13px 18px;
+                font-size: 0.9rem;
+            }
+            .cp-tab-panel {
+                padding: 22px 18px;
+                border-radius: 18px;
+            }
+            .cp-tab-panel.active {
+                gap: 24px;
+            }
+            .cp-panel-img {
+                height: 225px;
+            }
+            .cp-panel-content h3 {
+                font-size: 1.45rem;
+            }
+            .cp-perks-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .cp-card-body {
+                padding: 20px;
+            }
+            .cp-faq-q {
+                padding: 16px 18px;
+                font-size: 0.96rem;
+            }
+            .cp-faq-a {
+                padding: 0 18px;
+                font-size: 0.9rem;
+            }
+            .fe-footer-bottom {
+                text-align: center;
+            }
+            .fe-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ser-nav-container {
+                padding: 0 16px;
+            }
+            .ser-logo-section {
+                gap: 10px;
+            }
+            .ser-brand-name {
+                font-size: 1.3rem;
+            }
+            .cp-hero h1 {
+                font-size: 1.85rem;
+            }
+            .cp-hero-img-stack {
+                height: 260px;
+            }
+            .cp-img-large {
+                width: 95%;
+                height: 220px;
+            }
+            .cp-img-small {
+                width: 58%;
+                height: 115px;
+            }
+            .cp-panel-img {
+                height: 195px;
+            }
         }
 
         /* ===== FOOTER (Unchanged as requested) ===== */
@@ -769,6 +919,7 @@
             text-decoration: none;
             font-size: 0.875rem;
             transition: color 0.2s ease;
+            word-break: break-word;
         }
 
         .fe-contact-text.fe-large {
@@ -868,8 +1019,8 @@
             <div class="cp-hero-grid">
                 <div>
                     <div class="cp-badge">
-                        <i data-lucide="building-2" style="width:18px; height:18px;"></i>
-                        Commercial & Industrial Plumbing Services
+                        <i data-lucide="building-2" style="width:18px; height:18px; flex-shrink:0;"></i>
+                        <span>Commercial & Industrial Plumbing Services</span>
                     </div>
                     <h1>Enterprise-Grade Plumbing Solutions for <span>Businesses & Facilities</span></h1>
                     <p>Minimize downtime and protect your bottom line. We provide licensed commercial plumbing maintenance, backflow certification, grease trap servicing, and rapid emergency repairs for offices, restaurants, and retail properties.</p>
@@ -1237,7 +1388,6 @@
                     <a href="Privacy Policy.html">Privacy Policy</a>
                     <a href=" Terms of service.html">Terms of Service</a>
                 </div>
-            </div>
             </div>
         </div>
     </footer>
